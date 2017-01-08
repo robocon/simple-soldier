@@ -1,4 +1,4 @@
 .vscode
 reports/*
-files/*
+files/*.pdf
 applications/system/config.php
