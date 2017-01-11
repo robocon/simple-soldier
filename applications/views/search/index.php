@@ -68,6 +68,11 @@
                 </div>
             </form>
         </fieldset>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+
         <?php
         if ( count($patient_list) > 0 ) {
             ?>
@@ -76,30 +81,52 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>ชื่อ-สกุล</th>
-                            <th>เลขบัตรประชาชน</th>
-                            <th>จังหวัด</th>
-                            <th>โรงพยาบาล</th>
-                            <th>ปีที่ตรวจ</th>
+                            <th>ชื่อ-สกุล<br>เลขบัตรปชช.</th>
+                            <th>โรคที่ตรวจพบ</th>
+                            <th title="กฎกระทรวงฉบับที่ ๗๔/๕๐ และฉบับแก้ไข/เพิ่มเติมฉบับที่ ๗๕/๕๕ และ ๗๖/๕๕">กฎกระทรวง</th>
+                            <th>แพทย์ผู้ตรวจ</th>
+							<th>
+								ที่อยู่
+							</th>
+                            <th>วันที่ได้รับการตรวจ</th>
+							<th>
+								โรงพยาบาล
+							</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
+						// dump($patient_list);
                         $i = 1;
                         foreach ($patient_list as $key => $patient) {
+
+							$doctor = json_decode($patient['doctor']);
+							$doctor_name = implode("<br>", $doctor);
+
+							$token = generate_token('view_pdf');
                             ?>
                             <tr>
                                 <td><?=$i;?></td>
-                                <td><?=$patient['name'];?></td>
-                                <td><?=$patient['idcard'];?></td>
-                                <td><?=$patient['province'];?></td>
+                                <td>
+									<a href="<?=getUrl();?>pdf/base/<?=$patient['id'];?>/<?=$token;?>" target="_blank"><?=$patient['name'];?><br><?=$patient['idcard'];?></a>
+								</td>
+                                <td><?=$patient['diag'];?></td>
+								<td>ข้อ <?=$patient['regula'];?></td>
+
                                 <td>
                                     <?php
-                                    $hos_id = $patient['hos_id'];
-                                    echo $hospital_list[$hos_id];
+
+									echo $doctor_name;
                                     ?>
                                 </td>
-                                <td><?=($patient['year'] + 543);?></td>
+								<td><?=$patient['house_no'].' '.$patient['tambon'].' '.$patient['amphur'].' '.$patient['province'].' '.$patient['zipcode'];?></td>
+                                <td><?=ymd_tothai($patient['date_add']);?></td>
+								<td>
+									<?php
+									$hos_id = $patient['hos_id'];
+                                    echo $hospital_list[$hos_id];
+									?>
+								</td>
                             </tr>
                             <?php
                             $i++;

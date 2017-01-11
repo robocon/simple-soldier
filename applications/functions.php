@@ -303,3 +303,24 @@ function check_token($token, $name){
 	}
 	return $check_token;
 }
+
+function errorMsg($status = NULL, $id = ''){
+	$msg = 'บันทึก';
+	if( $status === 'edit' ){
+		$msg = 'แก้ไข';
+	} elseif( $status === 'delete' ) {
+		$msg = 'ลบ';
+	}
+
+	return "ไม่สามารถ{$msg}ข้อมูลได้ กรุณาเก็บรหัส $id นี้เพื่อแจ้งผู้ดูแลระบบเพื่อทำการแก้ไขต่อไป";
+}
+
+/**
+ * SUPPORT ONLY YYYY-MM-DD
+ * E.g. 2017-01-29 to 29 มกราคม 2560
+ */
+function ymd_tothai($date_ymd){
+    global $full_months;
+    list($y, $m, $d) = explode('-', $date_ymd);
+    return $d.' '.$full_months[$m].' '.($y + 543);
+}

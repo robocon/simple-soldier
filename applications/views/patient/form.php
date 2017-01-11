@@ -115,7 +115,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <?=getYearList('year', false, $year, array(), 'form-control');?>
+                                    <?=getYearList('year', true, $year, array(), 'form-control');?>
                                 </div>
                             </div>
                         </div>
@@ -129,15 +129,15 @@
                         <input type="file" name="cert" class="form-control">
                         <span>* อนุญาตเฉพาะไฟล์ .pdf เท่านั้น</span>
                         <?php
-                        if( isset($item['cert']) && $id > 0 ){
+                        if( file_exists('files/'.$item['cert']) !== false && $id > 0 ){
+                            $token = generate_token('view_pdf');
                             ?>
                             <div class="">
-                                <embed src="<?=getUrl();?>files/<?=$item['cert'];?>" style="width: 100%; height: 400px;">
+                                <embed src="<?=getUrl();?>pdf/base/<?=$item['id'];?>/<?=$token;?>" style="width: 100%; height: 400px;">
                             </div>
                             <?php
                         }
                         ?>
-                        
                     </div>
                 </div>
             </div>
@@ -236,9 +236,6 @@ $(function(){
             $('.main-form').submit();
 
         }
-
-
-
 
     });
 

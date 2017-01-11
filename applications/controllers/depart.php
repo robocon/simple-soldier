@@ -5,7 +5,7 @@
 class Depart extends Controller
 {
 	public function base(){
-
+		
 		$db = $this->load_db();
 		$sql = "SELECT a.`id`,a.`name`,a.`latest_date`, b.`page_count`
 		FROM `departs` a

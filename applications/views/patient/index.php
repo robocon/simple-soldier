@@ -24,7 +24,7 @@
 					<?php
 					$i = 1;
 					foreach ($items as $key => $item) {
-						
+
 						$fullname = $item['firstname'].' '.$item['lastname'];
 						$pre_dr = json_decode($item['doctor']);
 
@@ -35,14 +35,14 @@
 						<tr>
 							<td><?=$i;?></td>
 							<td>
-								<a href="#"><?=$fullname;?></a>
+								<a href="<?=getUrl();?>patient/edit/<?=$item['id'];?>/<?=$item_token;?>"><?=$fullname;?></a>
 							</td>
 							<td><?=$item['idcard'];?></td>
 							<td><?=$item['regula'];?></td>
 							<td><?=$doctor;?></td>
 							<td><?=$item['date_add'];?></td>
 							<td>
-								<a href="<?=getUrl();?>patient/delete/<?=$item['id'];?>/<?=$item_token;?>" class="del_item">ลบ</a> | 
+								<a href="<?=getUrl();?>patient/delete/<?=$item['id'];?>/<?=$item_token;?>" class="del_item">ลบ</a> |
 								<a href="<?=getUrl();?>patient/edit/<?=$item['id'];?>/<?=$item_token;?>">แก้ไข</a>
 							</td>
 						</tr>

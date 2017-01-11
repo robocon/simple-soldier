@@ -14,15 +14,15 @@ class Search extends Controller{
         $hos_select = input_post('hos_id', $this->user->hos_id);
         $def_year = input_post('year', date('Y'));
         $year_range = range(2004, date('Y'));
-        
+
         $db = $this->load_db();
 
         $sql = "SELECT `id`, `name`
-        FROM `hospital` 
+        FROM `hospital`
         ORDER BY `id` DESC;";
         $db->select($sql);
         $hospitals = $db->get_items();
-        
+
         $action = input_post('action');
         $patient_list = array();
         if ( $action === 'start_search' ) {
@@ -33,18 +33,23 @@ class Search extends Controller{
             }
 
             $sql = "SELECT `id`,
-                CONCAT(`firstname`,' ',`lastname`) AS `name`, 
+                CONCAT(`firstname`,' ',`lastname`) AS `name`,
                 `idcard`,
+                `diag`,
+                `house_no`,
+                `tambon`,
+                `amphur`,
                 `province`,
+                `zipcode`,
                 `regula`,
                 `doctor`,
                 `hos_id`,
-                SUBSTRING(`date_add`, 1, 4) AS `year`,
+                `date_add`,
                 `status`
-            FROM `patients` 
-            WHERE `status` = '1' 
+            FROM `patients`
+            WHERE `status` = '1'
             AND `date_add` LIKE '$def_year%' ";
-            
+
             if( $idcard !== false ){
                 $sql .= "AND `idcard` LIKE '$idcard%' ";
             }
@@ -64,7 +69,7 @@ class Search extends Controller{
             $sql .= "ORDER BY `hos_id` DESC, `firstname` ASC ;";
             $db->select($sql);
             $patient_list = $db->get_items();
-            
+
         }
 
         $data = array(
@@ -80,6 +85,30 @@ class Search extends Controller{
 
         $view = $this->load_view('search/index');
         $view->set_val($data);
+        $view->render();
+
+    }
+
+    public function pdf_preview($item_id, $token){
+
+        exit;
+
+        $get_token = check_token($token, 'item'.$item_id);
+        if ( $get_token !== true OR $this->user === false ) {
+            redirect('error');
+        }
+
+        $item_id = (int) $item_id;
+
+        $db = $this->load_db();
+        $sql = "SELECT `cert`
+        FROM `patients`
+        WHERE `id` = :item_id ;";
+        $db->select($sql, array(':item_id' => $item_id));
+        $item = $db->get_item();
+
+        $view = $this->load_view('patient/detail');
+        $view->set_val($item);
         $view->render();
 
     }

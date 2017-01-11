@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win32 (AMD64)
 --
--- Host: 192.168.99.100    Database: soldier
+-- Host: localhost    Database: soldier
 -- ------------------------------------------------------
--- Server version	5.5.53
+-- Server version	5.0.51b-community-nt-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,10 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Not dumping tablespaces as no INFORMATION_SCHEMA.FILES table on this server
+--
+
+--
 -- Table structure for table `departs`
 --
 
@@ -23,12 +27,12 @@ DROP TABLE IF EXISTS `departs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `departs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `latest_date` datetime DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
-  `sort` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `latest_date` datetime default NULL,
+  `author` varchar(255) default NULL,
+  `sort` int(11) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,9 +54,9 @@ DROP TABLE IF EXISTS `diags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `diags` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL auto_increment,
   `name` text,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='โรคที่ตรวจพบ';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -73,10 +77,10 @@ DROP TABLE IF EXISTS `doctors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `doctors` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `hos_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `hos_id` int(11) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -97,11 +101,11 @@ DROP TABLE IF EXISTS `hospital`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hospital` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `date` datetime default NULL,
+  `author` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,12 +127,12 @@ DROP TABLE IF EXISTS `images`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `images` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `path` varchar(255) DEFAULT NULL,
-  `page_id` int(11) DEFAULT NULL,
-  `date_time` datetime DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL auto_increment,
+  `path` varchar(255) default NULL,
+  `page_id` int(11) default NULL,
+  `date_time` datetime default NULL,
+  `author` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -150,15 +154,15 @@ DROP TABLE IF EXISTS `pages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) DEFAULT NULL,
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(255) default NULL,
   `data` longtext,
-  `category` int(11) DEFAULT NULL,
-  `date_add` datetime DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) DEFAULT NULL,
-  `sort` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `category` int(11) default NULL,
+  `date_add` datetime default NULL,
+  `author` varchar(255) default NULL,
+  `status` tinyint(4) default NULL,
+  `sort` int(11) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -179,26 +183,26 @@ DROP TABLE IF EXISTS `patients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `patients` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) DEFAULT NULL,
-  `lastname` varchar(255) DEFAULT NULL,
-  `idcard` varchar(13) DEFAULT NULL,
-  `house_no` varchar(255) DEFAULT NULL,
-  `tambon` varchar(255) DEFAULT NULL,
-  `amphur` varchar(255) DEFAULT NULL,
-  `province` varchar(255) DEFAULT NULL,
-  `zipcode` varchar(5) DEFAULT NULL,
+  `id` int(11) NOT NULL auto_increment,
+  `firstname` varchar(255) default NULL,
+  `lastname` varchar(255) default NULL,
+  `idcard` varchar(13) default NULL,
+  `house_no` varchar(255) default NULL,
+  `tambon` varchar(255) default NULL,
+  `amphur` varchar(255) default NULL,
+  `province` varchar(255) default NULL,
+  `zipcode` varchar(5) default NULL,
   `diag` text COMMENT 'โรคที่ตรวจพบ',
-  `regula` varchar(255) DEFAULT NULL,
+  `regula` varchar(255) default NULL,
   `doctor` text,
-  `date_add` date DEFAULT NULL COMMENT 'วันที่ได้รับการตรวจ',
+  `date_add` date default NULL COMMENT 'วันที่ได้รับการตรวจ',
   `diag_etc` text,
-  `hos_id` int(11) DEFAULT NULL,
-  `owner` varchar(45) DEFAULT NULL,
-  `date` datetime DEFAULT NULL COMMENT 'วันที่บันทึกข้อมูล',
+  `hos_id` int(11) default NULL,
+  `owner` varchar(45) default NULL,
+  `date` datetime default NULL COMMENT 'วันที่บันทึกข้อมูล',
   `cert` text COMMENT 'ใบสำคัญความเห็นแพทย์',
-  `status` tinyint(2) DEFAULT NULL COMMENT 'สถานะ',
-  PRIMARY KEY (`id`)
+  `status` tinyint(2) default NULL COMMENT 'สถานะ',
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -208,7 +212,7 @@ CREATE TABLE `patients` (
 
 LOCK TABLES `patients` WRITE;
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
-INSERT INTO `patients` VALUES (1,'ทดสอบ','ทดลอง','1509900230000','102/3','ทดสอบตำบล','ทดสอบอำเภอ','ทดสอบจังหวัด','50000','ทดสอบ Diag','2(9)(ค)','[\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e481\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e482\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e483\"]','2017-01-06',NULL,1,'I am admin','2017-01-06 15:25:23','4dddc8848e478f19614b14cc4339db95.pdf',1),(2,'ทดสอบ','ทดลอง','1509900230000','102/3','ทดสอบตำบล','ทดสอบอำเภอ','ทดสอบจังหวัด','50000','ทดสอบ Diag','2(9)(ค)','[\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e481\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e482\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e483\"]','2017-01-06',NULL,1,'I am admin','2017-01-06 15:29:42','89f158ec0dd88e4fa185f013ef1b7691.pdf',0);
+INSERT INTO `patients` VALUES (1,'ทดสอบ','ทดลอง','1509900230000','102/3','ทดสอบตำบล','ทดสอบอำเภอ','ทดสอบจังหวัด','50000','ทดสอบ Diag','2(9)(ค)','[\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e481\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e482\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e483\"]','2017-01-06',NULL,1,'I am admin','2017-01-06 15:25:23','3e4a52c85dfe5fb536a415fa094f6d0d.pdf',1),(2,'ทดสอบ','ทดลอง','1509900230000','102/3','ทดสอบตำบล','ทดสอบอำเภอ','ทดสอบจังหวัด','50000','ทดสอบ Diag','2(9)(ค)','[\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e481\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e482\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e483\"]','2017-01-06',NULL,1,'I am admin','2017-01-06 15:29:42','89f158ec0dd88e4fa185f013ef1b7691.pdf',0);
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,9 +224,9 @@ DROP TABLE IF EXISTS `regular`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `regular` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(45) default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='ข้อกฏกระทรวง';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -243,16 +247,16 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fullname` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `level` varchar(255) DEFAULT 'user',
-  `status` tinyint(4) DEFAULT '0',
-  `hos_id` varchar(45) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL auto_increment,
+  `fullname` varchar(255) default NULL,
+  `username` varchar(255) default NULL,
+  `password` varchar(255) default NULL,
+  `email` varchar(255) default NULL,
+  `level` varchar(255) default 'user',
+  `status` tinyint(4) default '0',
+  `hos_id` varchar(45) default NULL,
+  `date` datetime default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -275,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-08 12:06:53
+-- Dump completed on 2017-01-11 17:29:31

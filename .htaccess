@@ -15,4 +15,9 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.php/$1 [L]
+
+    # Reject direct access
+    RedirectMatch 403 /logs/mysql-errors.log
+    RedirectMatch 403 /files/.+\.pdf
+
 </IfModule>
