@@ -33,22 +33,6 @@ class User extends Controller{
 
     }
 
-	// public function register_form(){
-    //     global $ranks, $config;
-    //     if( $this->user !== false ){
-    //         redirect('');
-    //     }
-
-	// 	$open_register = $config['open_register'];
-	// 	if( $open_register === false ){
-	// 		redirect('');
-	// 	}
-
-    //     $view = $this->load_view('user/register_form');
-    //     $view->set_val(array('ranks' => $ranks));
-	// 	$view->render();
-    // }
-
     public function logout(){
         Session_helper::destroy();
         redirect();
@@ -158,4 +142,83 @@ class User extends Controller{
 		echo json_encode(array('checker' => $res));
 		exit;
 	}
+
+    /**
+     * @todo ตรวจสอบ email ว่าซ้ำกันรึป่าว
+     *
+     */
+    public function edit_user(){
+
+        if( $this->user === false ){
+            redirect('error');
+        }
+
+        $db = $this->load_db();
+
+		$sql = "SELECT `id`,`name`
+		FROM `hospital`;";
+		$db->select($sql);
+		$hospitals = $db->get_items();
+
+        $sql = "SELECT `id`,`fullname`,`email`,`hos_id`,`level`
+        FROM `users`
+        WHERE `id` = :user_id ";
+        $db->select($sql, array(':user_id' => $this->user->id));
+        $item = $db->get_item();
+
+        $v = $this->load_view('user/edit_form');
+		$v->set_val(array(
+            'hospitals' => $hospitals,
+            'item' => $item
+        ));
+        $v->render();
+
+    }
+
+    public function save_edit_form(){
+
+        $token = check_token(input_post('token'), 'save_edit_form');
+        if ( $token !== true ) {
+            echo 'Invalid token';
+            exit;
+        }
+
+        $fullname = input_post('fullname');
+        $email = input_post('email');
+        $id = $this->user->id;
+
+        $db = $this->load_db();
+        $sql = "UPDATE `users`
+        SET
+        `fullname` = :fullname,
+        `email` = :email
+        WHERE `id` = :user_id;";
+        $data = array(
+            ':fullname' => $fullname,
+            ':email' => $email,
+            ':user_id' => $id
+        );
+
+        $update = $db->update($sql, $data);
+        $msg = 'บันทึกข้อมูลเรียบร้อย';
+        if( isset($update['id']) ){
+            $msg = errorMsg('save', $update['id']);
+        }
+
+        redirect('user/edit_user', $msg);
+        exit;
+    }
+
+    public function edit_password(){
+
+        $v = $this->load_view('user/edit_password_form');
+        $v->render();
+
+    }
+
+    public function save_password_form(){
+
+
+        exit;
+    }
 }
