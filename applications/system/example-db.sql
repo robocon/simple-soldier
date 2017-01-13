@@ -20,33 +20,6 @@
 --
 
 --
--- Table structure for table `departs`
---
-
-DROP TABLE IF EXISTS `departs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `departs` (
-  `id` int(11) NOT NULL auto_increment,
-  `name` varchar(255) default NULL,
-  `latest_date` datetime default NULL,
-  `author` varchar(255) default NULL,
-  `sort` int(11) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `departs`
---
-
-LOCK TABLES `departs` WRITE;
-/*!40000 ALTER TABLE `departs` DISABLE KEYS */;
-INSERT INTO `departs` VALUES (14,'รพ.ค่ายสุรศักดิ์','2016-09-01 14:10:44','I am admin',1),(15,'รพ.ค่ายนเรศวร','2016-09-01 14:13:48','I am admin',2);
-/*!40000 ALTER TABLE `departs` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `diags`
 --
 
@@ -115,64 +88,8 @@ CREATE TABLE `hospital` (
 
 LOCK TABLES `hospital` WRITE;
 /*!40000 ALTER TABLE `hospital` DISABLE KEYS */;
-INSERT INTO `hospital` VALUES (1,'dummy 001','2017-01-04 10:19:45','I am admin'),(2,'dummy 002','2017-01-04 10:19:47','I am admin'),(3,'dummy 003','2017-01-04 10:19:49','I am admin');
+INSERT INTO `hospital` VALUES (1,'รพ.ค่ายสุรศักดิ์มนตรี','2017-01-13 10:21:03','I am super admin'),(2,'รพ.ค่ายกาวิละ','2017-01-13 10:21:23','I am super admin'),(3,'รพ.ค่ายจิรประวัติ','2017-01-13 10:21:33','I am super admin');
 /*!40000 ALTER TABLE `hospital` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `images`
---
-
-DROP TABLE IF EXISTS `images`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `images` (
-  `id` int(11) NOT NULL auto_increment,
-  `path` varchar(255) default NULL,
-  `page_id` int(11) default NULL,
-  `date_time` datetime default NULL,
-  `author` varchar(255) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `images`
---
-
-LOCK TABLES `images` WRITE;
-/*!40000 ALTER TABLE `images` DISABLE KEYS */;
-INSERT INTO `images` VALUES (1,'gallerys/9/d29189efe2a0c7f26f9874c8eaff3dba.jpg',1,'2016-08-19 14:33:08','I am admin');
-/*!40000 ALTER TABLE `images` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pages`
---
-
-DROP TABLE IF EXISTS `pages`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pages` (
-  `id` int(11) NOT NULL auto_increment,
-  `title` varchar(255) default NULL,
-  `data` longtext,
-  `category` int(11) default NULL,
-  `date_add` datetime default NULL,
-  `author` varchar(255) default NULL,
-  `status` tinyint(4) default NULL,
-  `sort` int(11) default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pages`
---
-
-LOCK TABLES `pages` WRITE;
-/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -203,7 +120,7 @@ CREATE TABLE `patients` (
   `cert` text COMMENT 'ใบสำคัญความเห็นแพทย์',
   `status` tinyint(2) default NULL COMMENT 'สถานะ',
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -212,7 +129,7 @@ CREATE TABLE `patients` (
 
 LOCK TABLES `patients` WRITE;
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
-INSERT INTO `patients` VALUES (1,'ทดสอบ','ทดลอง','1509900230000','102/3','ทดสอบตำบล','ทดสอบอำเภอ','ทดสอบจังหวัด','50000','ทดสอบ Diag','2(9)(ค)','[\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e481\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e482\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e483\"]','2017-01-06',NULL,1,'I am admin','2017-01-06 15:25:23','3e4a52c85dfe5fb536a415fa094f6d0d.pdf',1),(2,'ทดสอบ','ทดลอง','1509900230000','102/3','ทดสอบตำบล','ทดสอบอำเภอ','ทดสอบจังหวัด','50000','ทดสอบ Diag','2(9)(ค)','[\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e481\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e482\",\"\\u0e2b\\u0e21\\u0e2d\\u0e04\\u0e19\\u0e17\\u0e35\\u0e483\"]','2017-01-06',NULL,1,'I am admin','2017-01-06 15:29:42','89f158ec0dd88e4fa185f013ef1b7691.pdf',0);
+INSERT INTO `patients` VALUES (1,'กฤตนัย','ร่องบอน','1540300119554','86/4 ม.5','บ้านปิน','ลอง','แพร่','54150','โรคของต่อมไร้ท่อและภาวะผิดปกติของ เมตะบอลิสัม','๒ (๘) (ง)','[\"\\u0e13\\u0e23\\u0e07\\u0e04\\u0e4c \\u0e1b\\u0e23\\u0e35\\u0e14\\u0e32\\u0e2d\\u0e19\\u0e31\\u0e19\\u0e17\\u0e2a\\u0e38\\u0e02\",\"\\u0e19\\u0e20\\u0e2a\\u0e21\\u0e23 \\u0e18\\u0e23\\u0e23\\u0e21\\u0e25\\u0e31\\u0e01\\u0e29\\u0e21\\u0e35\",\"\\u0e40\\u0e0a\\u0e32\\u0e27\\u0e23\\u0e34\\u0e19\\u0e17\\u0e23\\u0e4c \\u0e2d\\u0e38\\u0e48\\u0e19\\u0e40\\u0e04\\u0e23\\u0e37\\u0e2d\"]','2016-10-05',NULL,1,'I am super admin','2017-01-13 11:36:49','ff5df0f75323c63493b9be37cd567702.pdf',1);
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,7 +174,7 @@ CREATE TABLE `users` (
   `hos_id` varchar(45) default NULL,
   `date` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,7 +183,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'I am admin','admin','15c0249e5d926ff74ec114e9c477b0a1f04965b3ed4503a08ec129c27114b27c','admin@mail.com','super admin',1,'1','2016-12-31 15:00:05'),(5,'admin สุรศักดิ์','adminsurasak','9982ead73bc3b53618731285ba708f3194bab4a9fadf1a46812b64461230ea9e','adminsurasak@mi.th','admin',1,'1','2016-12-31 15:04:47'),(6,'ผู้ดูแล ระบบ2','admin2','786d789bd900e5558be7fc004841bbf5eede57cf0e37f9decda8454dd0cbc9f9','admin2@mail.com','admin',1,'2','2017-01-07 08:13:43');
+INSERT INTO `users` VALUES (1,'I am super admin','admin','bd3e160ec6c29f825709a7b6024925ef6ae15b5b6b93e34f72d2217db7e90de8','i_am_super_admin@mail.com','super admin',1,'1','2016-12-31 15:00:05'),(2,'Admin ค่ายกาวิละ','kawila','dbfc765626ec440605a4ce10c15e8645adfef4eed5b0f707bf20447a9e9eed5c','kawila@mail.com','admin',1,'2','2017-01-13 10:44:05'),(3,'Admin ค่ายจิรประวัติ','chiraprawat','cf595fa91226326357a161b7ed7bdcdf3bf6be25137dccafeb64202ce884062f','chiraprawat@mail.com','admin',1,'3','2017-01-13 10:53:03');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -279,4 +196,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-11 17:29:31
+-- Dump completed on 2017-01-13 14:13:46

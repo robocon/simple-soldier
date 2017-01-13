@@ -129,7 +129,7 @@
                         <input type="file" name="cert" class="form-control">
                         <span>* อนุญาตเฉพาะไฟล์ .pdf เท่านั้น</span>
                         <?php
-                        if( file_exists('files/'.$item['cert']) !== false && $id > 0 ){
+                        if( isset($item['cert']) && file_exists('files/'.$item['cert']) !== false && $id > 0 ){
                             $token = generate_token('view_pdf');
                             ?>
                             <div class="">
