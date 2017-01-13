@@ -25,25 +25,18 @@
 <script type="text/javascript">
     $(function(){
 
-        $('document').on('click', '.btn-save', function(){
-            // var pass = $('#password').val();
-            // var confirm_pass = $('#confirm_password').val();
-            //
-            // console.log(pass);
-            // console.log(confirm_pass);
+        $(document).on('click', '.btn-save', function(){
 
-            console.log(123412341234);
+            var old_password = $('#old_password').val();
+            var pass = $('#password').val();
+            var confirm_pass = $('#confirm_password').val();
 
-            return false;
-
-
-            /*
-            if( $.trim(pass).length == 0 ){
+            if( $.trim(pass).length == 0 || $.trim(confirm_pass).length == 0 || $.trim(old_password).length == 0 ){
                 return false;
             }
 
             if( $.trim(pass).length < 6 ){
-                alert('รหัสผ่านต้องมีความยาวอย่างน้อย 6ตัวอักษร');
+                alert('การตั้งรหัสผ่านต้องมีความยาวอย่างน้อย 6ตัวอักษร');
                 return false;
             }
 
@@ -51,8 +44,7 @@
                 alert('กรุณายืนยันรหัสผ่านให้ตรงกัน');
                 return false;
             }
-            */
-            
+
         });
 
 

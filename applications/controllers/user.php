@@ -206,7 +206,6 @@ class User extends Controller{
         }
 
         redirect('user/edit_user', $msg);
-        exit;
     }
 
     public function edit_password(){
@@ -218,7 +217,45 @@ class User extends Controller{
 
     public function save_password_form(){
 
+        $token = check_token(input_post('token'), 'save_edit_password');
+        if ( $token !== true ) {
+            echo 'Invalid token';
+            exit;
+        }
 
-        exit;
+        global $config;
+
+        $old_password = input_post('old_password');
+        $password = input_post('password');
+        $confirm_password = input_post('confirm_password');
+
+        $db = $this->load_db();
+        $sql = "SELECT `password` 
+        FROM `users` 
+        WHERE `id` = :user_id ";
+        $db->select($sql, array(':user_id' => $this->user->id));
+        $item = $db->get_item();
+
+        $confirm_old_pass = hash('sha256', $old_password.$this->user->username.$config['salt']);
+        if( $item['password'] !== $confirm_old_pass ){
+            js_alert('รหัสผ่านเก่าไม่ถูกต้อง');
+            exit;
+        }else{
+
+            $new_password = hash('sha256', $password.$this->user->username.$config['salt']);
+
+            $sql = "UPDATE `soldier`.`users`
+            SET
+            `password` = :new_password
+            WHERE `id` = :user_id;";
+            $update = $db->update($sql, array(':new_password' => $new_password, ':user_id' => $this->user->id));
+            $msg = 'บันทึกข้อมูลเรียบร้อย';
+            if ( isset($update['id']) ) {
+                $msg = errorMsg('save', $update['id']);
+            }
+        }
+
+        redirect('user/edit_password', $msg);
+        
     }
 }

@@ -2,3 +2,4 @@
 reports/*
 files/*.pdf
 applications/system/config.php
+logs/*.log
