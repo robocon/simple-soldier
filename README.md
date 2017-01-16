@@ -18,3 +18,7 @@
     - **functions.php** ฟังก์ชั่นต่างๆ
 - **assets** ที่อยู่ไฟล์ js, css และ image ต่างๆของตัวเว็บ
 - **logs** อ่าาาาาา ก็ log ไง
+
+### อ้างอิง
+- [รายชื่อจังหวัดในประเทศไทย พร้อมอำเภอ](https://github.com/parsilver/thailand-provinces)
+- [Bootstrap](https://getbootstrap.com/)

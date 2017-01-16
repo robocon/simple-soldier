@@ -16,8 +16,15 @@
 
         <script type="text/javascript" src="<?=getUrl();?>assets/js/jquery-1.12.1.min.js"></script>
         <script type="text/javascript" src="<?=getUrl();?>assets/js/bootstrap.min.js"></script>
+        <!--
+        Develop by: Kritsanasak Kuntaros
+        Email: roboconk@gmail.com
+        Facebook: https://www.facebook.com/kritsanasak
+        Linkedin: https://www.linkedin.com/in/kritsanasak
+        Line: kritphp
+        อยากร่วมพัฒนาต่อ? มานี่เล๊ยยย https://github.com/robocon/simple-soldier เรายินดีเพิ่มคุณเข้ามาสนุกในโปรเจค
+        -->
     </head>
-
 <body>
 <style type="text/css">
     @media print{
@@ -53,15 +60,12 @@
                     <?php if( $this->user ): ?>
                     <li><a href="<?=getUrl();?>search">ค้นหา</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">เมนู <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ฐานข้อมูล <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <?php if( $this->user->level === 'super admin' ): ?>
                             <li><a href="<?=getUrl();?>hospital">รายชื่อรพ.</a></li>
                             <?php endif; ?>
                             <li><a href="<?=getUrl();?>patient">รายชื่อผู้ยกเว้น</a></li>
-                            <!--
-                            <li><a href="<?=getUrl();?>importxls">นำเข้าข้อมูล</a></li>
-                            -->
                         </ul>
                     </li>
                     <?php endif; ?>

@@ -31,11 +31,13 @@
 						$doctor = implode("<br>", $pre_dr);
 
 						$item_token = generate_token('item'.$item['id']);
+						$pdf_token = generate_token('view_pdf');
 						?>
 						<tr>
 							<td><?=$i;?></td>
 							<td>
-								<a href="<?=getUrl();?>patient/edit/<?=$item['id'];?>/<?=$item_token;?>"><?=$fullname;?></a>
+								
+								<a href="<?=getUrl();?>pdf/base/<?=$item['id'];?>/<?=$pdf_token;?>" target="_blank"><?=$fullname;?></a>
 							</td>
 							<td><?=$item['idcard'];?></td>
 							<td><?=$item['regula'];?></td>

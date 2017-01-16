@@ -46,6 +46,7 @@
                         <div class="form-group">
                             <label for="">จังหวัด</label>
                             <input type="text" class="province form-control" name="province" value="<?=( !empty($province) ) ? $province : '' ;?>">
+                            <div class="row test_pv_name"></div>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -70,9 +71,48 @@
         </fieldset>
 	</div>
 </div>
+<script type="text/javascript">
+$(function(){
+    $(document).on('keyup','.province',function(){
+        
+        var province_txt = $.trim($(this).val());
+        var token = '<?=generate_token('search_province');?>';
+        if( province_txt.length > 0 ){
+            $.ajax({
+                url: '<?=getUrl();?>search/get_province',
+                data: {'province': province_txt,'token': token},
+                method: 'post',
+                dataType: 'json',
+                success: function(lists){
+                    
+                    if( lists.length > 0 ){
+                        var li_txt = '';
+                        for( var i=0; i<lists.length; i++ ){
+                            var item = lists[i];
+                            li_txt += '<li class="pv_item" data-pv="'+item.name+'">'+item.name+'</li>';
+                        }
+                        
+                        var test = '<ul class="parent_pv">'+li_txt+'</ul>';
+                        $('.test_pv_name').html(test);
+                    }
+
+                    if( $('.pv_item').length > 0 ){
+                        $(document).on('click','.pv_item',function(){
+                            var get_pv = $(this).attr('data-pv');
+                            $('.province').val(get_pv);
+                            $('.parent_pv').remove();
+                        });
+                    }
+                    
+                }
+            });
+        }
+    });
+
+});
+</script>
 <div class="row">
 	<div class="col-sm-12">
-
         <?php
         if ( count($patient_list) > 0 ) {
             ?>
@@ -84,7 +124,7 @@
                             <th>ชื่อ-สกุล<br>เลขบัตรปชช.</th>
                             <th>โรคที่ตรวจพบ</th>
                             <th title="กฎกระทรวงฉบับที่ ๗๔/๕๐ และฉบับแก้ไข/เพิ่มเติมฉบับที่ ๗๕/๕๕ และ ๗๖/๕๕">กฎกระทรวง</th>
-                            <th>แพทย์ผู้ตรวจ</th>
+                            <th width="13%">แพทย์ผู้ตรวจ</th>
 							<th>
 								ที่อยู่
 							</th>
@@ -96,7 +136,6 @@
                     </thead>
                     <tbody>
                         <?php
-						// dump($patient_list);
                         $i = 1;
                         foreach ($patient_list as $key => $patient) {
 
@@ -136,9 +175,16 @@
                 </table>
             </div>
             <?php
-        }else{
+        }
+        
+        if( !empty($action) && count($patient_list) === 0 ){
             ?>
-            <div class="row">ไม่พบข้อมูล</div>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <div class="alert alert-warning text-center">ไม่พบข้อมูล</div>
+                </div>
+            </div>
             <?php
         }
         ?>

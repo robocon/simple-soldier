@@ -80,13 +80,36 @@ class Search extends Controller{
             'name' => $name,
             'province' => $province,
             'def_year' => $def_year,
-            'patient_list' => $patient_list
+            'patient_list' => $patient_list,
+            'action' => $action
         );
 
         $view = $this->load_view('search/index');
         $view->set_val($data);
         $view->render();
 
+    }
+
+    public function get_province(){
+
+        $token = input_post('token');
+        $get_token = check_token($token, 'search_province');
+        if ( $get_token !== true OR $this->user === false ) {
+            redirect('error');
+        }
+
+        $search = input_post('province');
+
+        $db = $this->load_db();
+        $sql = "SELECT `name_th` AS `name`
+        FROM`provinces` 
+        WHERE `name_th` LIKE :province_search ;";
+        $db->select($sql, array(':province_search' => '%'.$search.'%'));
+        $items = $db->get_items();
+
+        header('Content-Type: application/json');
+        echo json_encode($items);
+        exit;
     }
 
     public function pdf_preview($item_id, $token){
