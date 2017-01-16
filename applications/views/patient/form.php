@@ -6,8 +6,11 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="">ชื่อ</label>
-                        <input type="text" class="firstname form-control" name="firstname" value="<?=( !empty($item['firstname']) ) ? $item['firstname'] : '' ;?>">
+                        <label class="control-label">ชื่อ</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">นาย</span>
+                            <input type="text" class="firstname form-control" name="firstname" value="<?=( !empty($item['firstname']) ) ? $item['firstname'] : '' ;?>">
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -115,7 +118,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <?=getYearList('year', true, $year, array(), 'form-control');?>
+                                    <?=getYearList('year', true, $year, range(2016, date('Y')), 'form-control');?>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +136,9 @@
                             $token = generate_token('view_pdf');
                             ?>
                             <div class="">
-                                <embed src="<?=getUrl();?>pdf/base/<?=$item['id'];?>/<?=$token;?>" style="width: 100%; height: 400px;">
+                                <object data="<?=getUrl();?>pdf/base/<?=$item['id'];?>/<?=$token;?>" type="application/pdf" style="width: 100%; height: 400px;">
+                                alt : <a href="<?=getUrl();?>pdf/base/<?=$item['id'];?>/<?=$token;?>" target="_blank"><?=$item['cert'];?></a>
+                                </object>
                             </div>
                             <?php
                         }
@@ -205,11 +210,6 @@ $(function(){
             msg = 'กรุณาใส่ชื่อจังหวัด';
             input_invalid = true;
             $('.province').focus();
-
-        }else if ( $.trim($('.zipcode').val()) == '' ) {
-            msg = 'กรุณาใส่ชื่อรหัสไปรณีย์';
-            input_invalid = true;
-            $('.zipcode').focus();
 
         }else if ( $.trim($('.diag').val()) == '' ) {
             msg = 'กรุณาใส่โรคที่ตรวจพบ';

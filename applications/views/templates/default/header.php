@@ -16,21 +16,6 @@
 
         <script type="text/javascript" src="<?=getUrl();?>assets/js/jquery-1.12.1.min.js"></script>
         <script type="text/javascript" src="<?=getUrl();?>assets/js/bootstrap.min.js"></script>
-        <!--
-        ลองถามตัวคุณเองดูดีๆ คุณมาเป็นหมอ เพือรักษาคนไข้ หรือเพียงแค่ตักตวงเอาผลประโยชน์เข้าตัวเอง
-        โดยเอาโรงพยาบาล หรือผลงาน มาเป็นข้ออ้าง ในการผลักดันตัวเองให้เด่นให้ดัง
-        แล้วไม่เคยคิดถึงคนที่อยู่เบื้องหลังบ้าง ว่าเค้าเดือดร้อนแค่ไหน
-
-        สิ่งหนึ่งที่ตัวผมเองเคยได้ยินแล้วขัดหูมากที่สุดก็คือ "ไม่เห็นยากเลยก็แค่ก๊อปปี้แล้วก็วาง"
-        ผมเองอยากจะบอกเหลือเกินว่า ทุกอาชีพมีต้นทุนของมัน คุณเคยมองเห็นมันบ้างรึป่าวล่ะ
-
-        ไม่มีใครได้กล่าวไว้
-        ผม ซึ่งเป็นผู้พัฒนาระบบ ได้กล่าวไว้เอง
-        :)
-
-        นาย กฤษณะศักดิ์ กันธรส
-        E-mail: roboconk@gmail.com
-        -->
     </head>
 
 <body>
@@ -56,17 +41,17 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?=getUrl();?>">รายงานการตรวจโรค</a>
+            <a class="navbar-brand" href="<?=getUrl();?>">รายงานการตรวจโรค(Demo)</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?=getUrl();?>">หน้าหลัก</a></li>
                 <?php if( $this->user === false ): ?>
                     <li><a href="<?=getUrl();?>login/form">เข้าสู่ระบบ</a></li>
                 <?php else: ?>
                     <?php if( $this->user ): ?>
+                    <li><a href="<?=getUrl();?>search">ค้นหา</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">เมนู <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -74,7 +59,6 @@
                             <li><a href="<?=getUrl();?>hospital">รายชื่อรพ.</a></li>
                             <?php endif; ?>
                             <li><a href="<?=getUrl();?>patient">รายชื่อผู้ยกเว้น</a></li>
-                            <li><a href="<?=getUrl();?>search">ค้นหา</a></li>
                             <!--
                             <li><a href="<?=getUrl();?>importxls">นำเข้าข้อมูล</a></li>
                             -->

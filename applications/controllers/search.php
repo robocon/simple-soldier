@@ -13,7 +13,7 @@ class Search extends Controller{
         $province = input_post('province');
         $hos_select = input_post('hos_id', $this->user->hos_id);
         $def_year = input_post('year', date('Y'));
-        $year_range = range(2004, date('Y'));
+        $year_range = range(2016, date('Y'));
 
         $db = $this->load_db();
 

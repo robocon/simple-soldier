@@ -119,7 +119,7 @@
 									echo $doctor_name;
                                     ?>
                                 </td>
-								<td><?=$patient['house_no'].' '.$patient['tambon'].' '.$patient['amphur'].' '.$patient['province'].' '.$patient['zipcode'];?></td>
+								<td><?=$patient['house_no'].' '.( isset($patient['tambon']) ? 'ต.'.$patient['tambon'] : '' ).' '.( isset($patient['amphur']) ? 'อ.'.$patient['amphur'] : '' ).' '.$patient['province'].' '.$patient['zipcode'];?></td>
                                 <td><?=ymd_tothai($patient['date_add']);?></td>
 								<td>
 									<?php
@@ -135,6 +135,10 @@
                     </tbody>
                 </table>
             </div>
+            <?php
+        }else{
+            ?>
+            <div class="row">ไม่พบข้อมูล</div>
             <?php
         }
         ?>

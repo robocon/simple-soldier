@@ -73,7 +73,7 @@ class Patient extends Controller{
 
         $file = $_FILES['cert'];
         $file_ext = substr($file['name'], strrpos($file['name'], '.') + 1);
-        if( $file_ext !== 'pdf' ){
+        if( $file_ext !== 'pdf' && $file['error'] === 0 ){
             js_alert('อนุญาตเฉพาะไฟล์ pdf เท่านั้น');
         }
 
