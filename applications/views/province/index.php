@@ -1,0 +1,1 @@
+<img src="<?=getUrl();?>assets/images/mapthailand01.png" class="img-responsive">

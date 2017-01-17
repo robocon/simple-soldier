@@ -6,7 +6,7 @@ class Hospital extends Controller
 {
 	public function base(){
 
-		if( $this->user === false OR $this->user->level !== 'super admin' ){
+		if( $this->user === false ){
             redirect('error');
         }
 
@@ -26,7 +26,7 @@ class Hospital extends Controller
 
 	public function form(){
 
-		if( $this->user === false OR $this->user->level !== 'super admin' ){
+		if( $this->user === false ){
             redirect('error');
         }
 
@@ -42,7 +42,7 @@ class Hospital extends Controller
 
     public function save(){
 
-		if( $this->user === false OR $this->user->level !== 'super admin' ){
+		if( $this->user === false ){
             redirect('error');
         }
 
@@ -85,7 +85,7 @@ class Hospital extends Controller
 
     public function edit( $id = false ){
 
-		if( $this->user === false OR $this->user->level !== 'super admin' ){
+		if( $this->user === false ){
             redirect('error');
         }
 
@@ -108,7 +108,7 @@ class Hospital extends Controller
 
     public function delete( $id = false ){
 
-		if( $this->user === false OR $this->user->level !== 'super admin' ){
+		if( $this->user === false ){
             redirect('error');
         }
 

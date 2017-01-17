@@ -63,9 +63,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ฐานข้อมูล <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <?php if( $this->user->level === 'super admin' ): ?>
-                            <li><a href="<?=getUrl();?>hospital">รายชื่อรพ.</a></li>
+                            
                             <?php endif; ?>
+                            <li><a href="<?=getUrl();?>hospital">รายชื่อรพ.</a></li>
                             <li><a href="<?=getUrl();?>patient">รายชื่อผู้ยกเว้น</a></li>
+                            <li><a href="<?=getUrl();?>province">รายชื่อจังหวัด</a></li>
                         </ul>
                     </li>
                     <?php endif; ?>

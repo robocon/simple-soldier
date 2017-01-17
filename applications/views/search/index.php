@@ -73,6 +73,8 @@
 </div>
 <script type="text/javascript">
 $(function(){
+
+    /*
     $(document).on('keyup','.province',function(){
         
         var province_txt = $.trim($(this).val());
@@ -108,6 +110,7 @@ $(function(){
             });
         }
     });
+    */
 
 });
 </script>
