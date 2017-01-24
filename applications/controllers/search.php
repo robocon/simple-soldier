@@ -48,7 +48,7 @@ class Search extends Controller{
                 `status`
             FROM `patients`
             WHERE `status` = '1'
-            AND `date_add` LIKE '$def_year%' ";
+            AND `date_add` >= '".( $def_year - 1 )."-10-01' AND `date_add` <= '$def_year-09-31'";
 
             if( $idcard !== false ){
                 $sql .= "AND `idcard` LIKE '$idcard%' ";
