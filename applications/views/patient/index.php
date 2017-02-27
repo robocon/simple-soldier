@@ -36,8 +36,17 @@
 						<tr>
 							<td><?=$i;?></td>
 							<td>
-								
-								<a href="<?=getUrl();?>pdf/base/<?=$item['id'];?>/<?=$pdf_token;?>" target="_blank"><?=$fullname;?></a>
+								<?php
+								if( empty($item['cert']) ){
+									?>
+									<?=$fullname;?>
+									<?php
+								}else{
+									?>
+									<a href="<?=getUrl();?>pdf/base/<?=$item['id'];?>/<?=$pdf_token;?>" target="_blank"><?=$fullname;?></a>
+									<?php
+								}
+								?>
 							</td>
 							<td><?=$item['idcard'];?></td>
 							<td><?=$item['regula'];?></td>

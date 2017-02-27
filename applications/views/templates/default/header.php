@@ -12,7 +12,7 @@
 
         <!-- Bootstrap core CSS -->
         <link href="<?=getUrl();?>assets/css/bootstrap.min.css" rel="stylesheet">
-        <link href="<?=getUrl();?>assets/css/default.css" rel="stylesheet">
+        <link href="<?=getUrl();?>assets/css/default.min.css" rel="stylesheet">
 
         <script type="text/javascript" src="<?=getUrl();?>assets/js/jquery-1.12.1.min.js"></script>
         <script type="text/javascript" src="<?=getUrl();?>assets/js/bootstrap.min.js"></script>

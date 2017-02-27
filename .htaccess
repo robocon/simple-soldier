@@ -6,11 +6,6 @@
     RewriteEngine On
     RewriteBase /soldier/
 
-    # Deny Access to Hidden Files and Directories
-    #RewriteCond %{SCRIPT_FILENAME} -d [OR]
-    #RewriteCond %{SCRIPT_FILENAME} -f
-    #RewriteRule "(^|/)\." - [F]
-
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d

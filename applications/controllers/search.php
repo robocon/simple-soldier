@@ -45,6 +45,7 @@ class Search extends Controller{
                 `doctor`,
                 `hos_id`,
                 `date_add`,
+                `cert`,
                 `status`
             FROM `patients`
             WHERE `status` = '1'
@@ -67,6 +68,7 @@ class Search extends Controller{
             }
 
             $sql .= "ORDER BY `hos_id` DESC, `firstname` ASC ;";
+
             $db->select($sql);
             $patient_list = $db->get_items();
 

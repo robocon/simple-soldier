@@ -150,14 +150,21 @@ $(function(){
                             <tr>
                                 <td><?=$i;?></td>
                                 <td>
-									<a href="<?=getUrl();?>pdf/base/<?=$patient['id'];?>/<?=$token;?>" target="_blank"><?=$patient['name'];?><br><?=$patient['idcard'];?></a>
-								</td>
+                                    <?php
+                                    if( empty($patient['cert']) ){
+                                        echo $patient['name'].'<br>'.$patient['idcard'];
+                                    }else{
+                                        ?>
+                                        <a href="<?=getUrl();?>pdf/base/<?=$patient['id'];?>/<?=$token;?>" target="_blank"><?=$patient['name'];?><br><?=$patient['idcard'];?></a>
+                                        <?php
+                                    }
+                                    ?>
+                                </td>
                                 <td><?=$patient['diag'];?></td>
 								<td>ข้อ <?=$patient['regula'];?></td>
 
                                 <td>
                                     <?php
-
 									echo $doctor_name;
                                     ?>
                                 </td>

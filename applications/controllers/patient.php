@@ -23,6 +23,7 @@ class Patient extends Controller{
             `regula`,
             `doctor`,
             `date_add`,
+            `cert`,
             `status`
         FROM `patients`
         WHERE `status` = 1 ";
@@ -137,7 +138,7 @@ class Patient extends Controller{
             :owner,
             NOW(),
             NULL,
-            0 );";
+            1 );";
 
             $data = array(
                 ':firstname' => $firstname,
