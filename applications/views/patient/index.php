@@ -12,7 +12,7 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>ชื่อ-สกุล</th>
+						<th width="15%">ชื่อ-สกุล</th>
 						<th>เลขบัตรปชช.</th>
 						<th>เลขกฎกระทรวง</th>
 						<th>แพทย์ผู้ตรวจ</th>
@@ -48,10 +48,10 @@
 								}
 								?>
 							</td>
-							<td><?=$item['idcard'];?></td>
-							<td><?=$item['regula'];?></td>
+							<td><?=to_thai_number($item['idcard']);?></td>
+							<td><?=to_thai_number($item['regula']);?></td>
 							<td><?=$doctor;?></td>
-							<td><?=$item['date_add'];?></td>
+							<td><?=to_thai_number(ymd_tothai($item['date_add']));?></td>
 							<td>
 								<a href="<?=getUrl();?>patient/delete/<?=$item['id'];?>/<?=$item_token;?>" class="del_item">ลบ</a> |
 								<a href="<?=getUrl();?>patient/edit/<?=$item['id'];?>/<?=$item_token;?>">แก้ไข</a>

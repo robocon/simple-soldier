@@ -125,16 +125,12 @@ $(function(){
                         <tr>
                             <th>#</th>
                             <th>ชื่อ-สกุล<br>เลขบัตรปชช.</th>
-                            <th>โรคที่ตรวจพบ</th>
+                            <th width="23%">โรคที่ตรวจพบ</th>
                             <th title="กฎกระทรวงฉบับที่ ๗๔/๕๐ และฉบับแก้ไข/เพิ่มเติมฉบับที่ ๗๕/๕๕ และ ๗๖/๕๕">กฎกระทรวง</th>
-                            <th width="13%">แพทย์ผู้ตรวจ</th>
-							<th>
-								ที่อยู่
-							</th>
-                            <th>วันที่ได้รับการตรวจ</th>
-							<th>
-								โรงพยาบาล
-							</th>
+                            <th width="15%">แพทย์ผู้ตรวจ</th>
+							<th width="15%">ที่อยู่</th>
+                            <th width="14%">วันที่ได้รับการตรวจ</th>
+							<th>โรงพยาบาล</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,24 +148,29 @@ $(function(){
                                 <td>
                                     <?php
                                     if( empty($patient['cert']) ){
-                                        echo $patient['name'].'<br>'.$patient['idcard'];
+                                        echo $patient['name'].'<br>'.to_thai_number($patient['idcard']);
                                     }else{
                                         ?>
-                                        <a href="<?=getUrl();?>pdf/base/<?=$patient['id'];?>/<?=$token;?>" target="_blank"><?=$patient['name'];?><br><?=$patient['idcard'];?></a>
+                                        <a href="<?=getUrl();?>pdf/base/<?=$patient['id'];?>/<?=$token;?>" target="_blank"><?=$patient['name'];?><br><?=to_thai_number($patient['idcard']);?></a>
                                         <?php
                                     }
                                     ?>
                                 </td>
                                 <td><?=$patient['diag'];?></td>
-								<td>ข้อ <?=$patient['regula'];?></td>
+								<td>ข้อ <?=to_thai_number($patient['regula']);?></td>
 
                                 <td>
                                     <?php
 									echo $doctor_name;
                                     ?>
                                 </td>
-								<td><?=$patient['house_no'].' '.( isset($patient['tambon']) ? 'ต.'.$patient['tambon'] : '' ).' '.( isset($patient['amphur']) ? 'อ.'.$patient['amphur'] : '' ).' '.$patient['province'].' '.$patient['zipcode'];?></td>
-                                <td><?=ymd_tothai($patient['date_add']);?></td>
+								<td>
+                                    <?php 
+                                        $full_address = $patient['house_no'].' '.( isset($patient['tambon']) ? 'ต.'.$patient['tambon'] : '' ).' '.( isset($patient['amphur']) ? 'อ.'.$patient['amphur'] : '' ).' '.$patient['province'].' '.$patient['zipcode'];
+                                        echo to_thai_number($full_address);
+                                    ?>
+                                </td>
+                                <td><?=to_thai_number(ymd_tothai($patient['date_add']));?></td>
 								<td>
 									<?php
 									$hos_id = $patient['hos_id'];

@@ -53,11 +53,14 @@ class Patient extends Controller{
             redirect('error');
         }
 
+        $provinces = $this->get_province();
+
         $data = array(
             'id' => 0,
             'day' => date('d'),
             'month' => date('m'),
             'year' => date('Y'),
+            'provinces' => $provinces
         );
 
         $view = $this->load_view('patient/form');
@@ -257,12 +260,16 @@ class Patient extends Controller{
 
         $item['doctor'] = json_decode($item['doctor']);
         list($year, $month, $day) = explode('-', $item['date_add']);
+
+        $provinces = $this->get_province();
+        
         $data = array(
             'id' => $item['id'],
             'item' => $item,
             'day' => $day,
             'month' => $month,
             'year' => $year,
+            'provinces' => $provinces
         );
 
         $view = $this->load_view('patient/form');
@@ -285,6 +292,16 @@ class Patient extends Controller{
         $db->update($sql, array(':item_id' => $item_id));
 
         redirect('patient', 'ลบข้อมูลเรียบร้อย');
+    }
+
+    private function get_province(){
+        $db = $this->load_db();
+        $sql = "SELECT `name_th`
+        FROM `provinces`;";
+
+        $db->select($sql);
+        $items = $db->get_items();
+        return $items;
     }
 
 }

@@ -222,6 +222,14 @@ function to_thai_number($number){
 	return $th_str;
 }
 
+function to_arabic_number($number){
+    global $th_number;
+    $arabic = array_keys($th_number);
+    $thai = array_values($th_number);
+    $arabic_number = str_replace($thai, $arabic, $number);
+    return $arabic_number;
+}
+
 function getDateList($name = 'days', $match = null, $class_name = false){
 	$def_day = range(1, 31);
 	?>

@@ -50,7 +50,20 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="">จังหวัด</label>
+                        <!--
                         <input type="text" class="province form-control" name="province" value="<?=( !empty($item['province']) ) ? $item['province'] : '' ;?>">
+                        -->
+                        <select class="form-control" name="province">
+                        <option value="">เลือกจังหวัด</option>
+                        <?php
+                        foreach ($provinces as $key => $pv_name) {
+                            $selected = ( $item['province'] == $pv_name['name_th'] ) ? 'selected="selected"' : '' ;
+                            ?>
+                            <option value="<?=$pv_name['name_th'];?>" <?=$selected;?> ><?=$pv_name['name_th'];?></option>
+                            <?php
+                        }
+                        ?>
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -191,6 +204,14 @@ $(function(){
             input_invalid = true;
             $('.idcard').focus();
 
+        }else if ( $.trim($('.idcard').val()) != '' ) {
+
+            if( $.trim($('.idcard').val().length) < 13 ){
+                msg = 'เลขบัตรประชาชนต้องมีอย่างน้อย 13ตัว';
+                input_invalid = true;
+                $('.idcard').focus();
+            }
+            
         }else if ( $.trim($('.house_no').val()) == '' ) {
             msg = 'กรุณาใส่เลขที่บ้าน';
             input_invalid = true;
