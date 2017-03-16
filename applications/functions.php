@@ -58,7 +58,7 @@ function get_session($name){
  */
 function input_get($name, $default = false, $filter = FILTER_SANITIZE_STRING){
 	$val = filter_input(INPUT_GET, $name, $filter);
-	return ( empty($val) ) ? $default : $val ;
+	return ( empty($val) ) ? $default : trim($val) ;
 }
 
 /**
@@ -66,7 +66,7 @@ function input_get($name, $default = false, $filter = FILTER_SANITIZE_STRING){
  */
 function input_post($name, $default = false, $filter = FILTER_SANITIZE_STRING){
 	$val = filter_input(INPUT_POST, $name, $filter);
-	return ( empty($val) ) ? $default : $val ;
+	return ( empty($val) ) ? $default : trim($val) ;
 }
 
 function input_etc($name, $default = false){

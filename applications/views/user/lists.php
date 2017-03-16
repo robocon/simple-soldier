@@ -12,6 +12,7 @@
 	            <tr>
 	                <th>#</th>
 	                <th>ชื่อ-สกุล</th>
+					<th>ชื่อผู้ใช้งาน</th>
 	                <th>ระดับ</th>
 	            </tr>
 	        </thead>
@@ -23,6 +24,7 @@
 	            <tr>
 	                <td><?=$i;?></td>
 	                <td><?=$user['fullname'];?></td>
+					<td><?=$user['username'];?></td>
 	                <td><?=$user['level'];?></td>
 	            </tr>
 	            <?php

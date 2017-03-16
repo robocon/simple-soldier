@@ -206,11 +206,11 @@ $(function(){
 
         }else if ( $.trim($('.idcard').val()) != '' ) {
 
-            if( $.trim($('.idcard').val().length) < 13 ){
-                msg = 'เลขบัตรประชาชนต้องมีอย่างน้อย 13ตัว';
-                input_invalid = true;
-                $('.idcard').focus();
-            }
+            // if( $.trim($('.idcard').val().length) < 13 ){
+            //     msg = 'เลขบัตรประชาชนต้องมีอย่างน้อย 13ตัว';
+            //     input_invalid = true;
+            //     $('.idcard').focus();
+            // }
             
         }else if ( $.trim($('.house_no').val()) == '' ) {
             msg = 'กรุณาใส่เลขที่บ้าน';
@@ -223,9 +223,9 @@ $(function(){
             $('.tambon').focus();
 
         }else if ( $.trim($('.amphur').val()) == '' ) {
-            msg = 'กรุณาใส่ชื่ออำเภอ';
-            input_invalid = true;
-            $('.amphur').focus();
+            // msg = 'กรุณาใส่ชื่ออำเภอ';
+            // input_invalid = true;
+            // $('.amphur').focus();
 
         }else if ( $.trim($('.province').val()) == '' ) {
             msg = 'กรุณาใส่ชื่อจังหวัด';

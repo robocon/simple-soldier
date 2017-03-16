@@ -12,17 +12,22 @@ class User extends Controller{
             ':my_id' => $this->user->id
         );
         $db = $this->load_db();
-        $sql = "SELECT `id`,`fullname`,`level`
+        $sql = "SELECT `id`,`fullname`,`username`,`level`
         FROM `users`
         WHERE `id` != :my_id";
 
         if( $this->user->level !== 'super admin' ){
             $sql .= " AND `level` != 'super admin'
             AND `hos_id` = :hospital_id";
-            array_push($data, array(':hospital_id' => $this->user->hos_id));
+            // array_push($data, array(':hospital_id' => $this->user->hos_id));
+            $data[':hospital_id'] = $this->user->hos_id;
         }
 
         $sql .= " ORDER BY `id` DESC";
+
+        // dump($sql);
+        // dump($data);
+        // exit;
 
         $db->select($sql, $data);
         $users = $db->get_items();
