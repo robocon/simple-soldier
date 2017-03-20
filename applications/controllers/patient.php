@@ -176,9 +176,7 @@ class Patient extends Controller{
             `diag` = :diag,
             `regula` = :regula,
             `doctor` = :doctor,
-            `date_add` = :date_add,
-            `hos_id` = :hos_id,
-            `owner` = :owner
+            `date_add` = :date_add
             WHERE `id` = :current_id;";
 
             $data = array(
@@ -194,8 +192,6 @@ class Patient extends Controller{
                 ':regula' => $regula,
                 ':doctor' => $doctor,
                 ':date_add' => $date_add,
-                ':hos_id' => $hos_id,
-                ':owner' => $owner,
                 ':current_id' => $id
             );
             $save = $db->update($sql, $data);

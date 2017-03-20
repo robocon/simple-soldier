@@ -249,7 +249,7 @@ class User extends Controller{
 
             $new_password = hash('sha256', $password.$this->user->username.$config['salt']);
 
-            $sql = "UPDATE `soldier`.`users`
+            $sql = "UPDATE `users`
             SET
             `password` = :new_password
             WHERE `id` = :user_id;";

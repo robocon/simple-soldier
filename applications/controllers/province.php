@@ -7,34 +7,19 @@ class Province extends Controller
 {
 	public function base(){
 
-		$codes = array(
-			'กรุงเทพมหานคร' => array( 'top' => '44', 'left' => '37' ),
-			'ตาก' => array( 'top' => '24', 'left' => '21' ),
-			'น่าน' => array( 'top' => '12', 'left' => '40' ),
-			'พะเยา' => array( 'top' => '9', 'left' => '33' ),
-			'พิจิตร' => array( 'top' => '29', 'left' => '36' ),
-			'ลำพูน' => array( 'top' => '16', 'left' => '21' ),
-			'สุโขทัย' => array( 'top' => '22', 'left' => '29' ),
-			'อุตรดิตถ์' => array( 'top' => '19', 'left' => '35' ),
-			'เชียงราย' => array( 'top' => '5', 'left' => '30' ),
-			'แพร่' => array( 'top' => '16', 'left' => '33' ),
-			'ลำปาง' => array( 'top' => '14', 'left' => '26' ),
-			'เชียงใหม่' => array( 'top' => '12', 'left' => '18' ),
-
-			'กำแพงเพชร' => array( 'top' => '29', 'left' => '28' ),
-			'ชลบุรี' => array( 'top' => '49', 'left' => '46' ),
-			'ชัยนาท' => array( 'top' => '36', 'left' => '33' ),
-			'นครราชสีมา' => array( 'top' => '37', 'left' => '52' ),
-			'นครสวรรค์' => array( 'top' => '32', 'left' => '32' ),
-			'พิษณุโลก' => array( 'top' => '24', 'left' => '39' ),
-			'สระบุรี' => array( 'top' => '40', 'left' => '43' ),
-			'สุราษฎร์ธานี' => array( 'top' => '77', 'left' => '24' ),
-			'หนองคาย' => array( 'top' => '17', 'left' => '61' ),
-			'อุทัยธานี' => array( 'top' => '34', 'left' => '27' ),
-			'เพชรบูรณ์' => array( 'top' => '27', 'left' => '45' ),
-		);
-
 		$db = $this->load_db();
+
+		// Map จุด x, y บนแผนที่
+		$sql = "SELECT `name_th`,`map_x`,`map_y` 
+		FROM `provinces` ";
+		$db->select($sql);
+		$pre_items = $db->get_items();
+		$codes = array();
+		foreach ($pre_items as $key => $item) {
+			$pv_key = $item['name_th'];
+			$codes[$pv_key] = array('top' => $item['map_x'], 'left' => $item['map_y']);
+		}
+
 		$sql = "SELECT a.*, COUNT(`province`) AS `rows` 
 		FROM (
 			SELECT TRIM(`province`) AS `province` 
