@@ -1,5 +1,6 @@
 .vscode
 reports/*
 files/*.pdf
-applications/system/config.php
+config.php
 logs/*.log
+.htaccess
