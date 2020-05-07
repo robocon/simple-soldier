@@ -1,6 +1,6 @@
 <div>
     <fieldset>
-        <legend>นำเข้ารายชื่อผู้ยกเว้นแบบ CSV</legend>
+        <legend>นำเข้ารายชื่อผู้งดเว้นเกณฑ์ทหาร แบบCSV</legend>
         <form action="<?=getUrl();?>patient/importcsv" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="exampleFormControlFile1">เลือกไฟล์นำเข้า</label>
