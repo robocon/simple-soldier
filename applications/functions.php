@@ -332,3 +332,33 @@ function ymd_tothai($date_ymd){
     list($y, $m, $d) = explode('-', $date_ymd);
     return $d.' '.$full_months[$m].' '.($y + 543);
 }
+
+/**
+ * เรียกดูปีงบประมาณ(ปกติจะอยู่ระหว่าง 1ตค ถึง 30กย)
+ *
+ * $long	bool	เป็นการเรียกดูปีแบบเต็มรูปแบบ
+ * $en		bool	เรียกดูปีแบบ ค.ศ.
+ * 
+ * get_year_checkup(); // 59
+ * get_year_checkup(true); // 2559
+ */
+function get_year_checkup($long = false, $en = false){
+	$d = date('d');
+	$m = date('m');
+	$y = date('Y') + 543 ;
+
+	if( $m >= 10 && $d >= 1 ){
+		$y += 1;
+	}
+
+	if( $en === true ){
+		$y -= 543 ;
+	}
+
+	if( $long === true ){
+		return $y;
+	}
+
+	$y = substr($y, 2);
+	return $y;
+}

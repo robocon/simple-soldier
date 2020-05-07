@@ -37,12 +37,14 @@ class Login extends Controller{
 		);
 
 		$db->select($sql, $data);
-		$user = $db->get_item();
+		
 		$user_row = $db->get_rows();
 		if( $user_row === 0 ){
 			redirect('login/form', 'ไม่พบผู้ใช้งานในระบบ กรุณาตรวจสอบข้อมูลใหม่อีกครั้ง');
+			
 		}else{
 
+			$user = $db->get_item();
 			$user_data = array(
 				'id' => (int)$user['id'],
 				'username' => $user['username'],

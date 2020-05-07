@@ -5,11 +5,36 @@
  */
 class Checker extends Controller
 {
+
+    public function update_user(){
+        global $config;
+
+        $update_users = array(
+
+            '15' => 'cmi3',
+
+        );
+
+        $db = $this->load_db();
+        foreach ($update_users as $id => $to) {
+
+            $password = hash('sha256', '1234'.$to.$config['salt']);
+            dump($password);
+
+            $sql = "UPDATE `users`
+            SET
+            `password` = '$password'
+            WHERE `id` = '$id';";
+            $update = $db->update($sql);
+            dump($update);
+        }
+    }
+
 	public function idcard(){
 
 		$db = $this->load_db();
 
-		$sql = "SELECT *FROM `patients`";
+		$sql = "SELECT * FROM `patients` WHERE `status` = '1'";
 		$db->select($sql);
 		$items = $db->get_items();
 
@@ -19,15 +44,20 @@ class Checker extends Controller
         $i = 1;
 
         foreach ($items as $key => $item) {
-
-            $idcard_clean = preg_replace('/\s/', '', $item['idcard']);
+            
+            // dump($item['idcard']);
+            $idcard_clean = preg_replace('/\s/', '', trim($item['idcard']));
             $idcard = to_arabic_number($idcard_clean);
+            // dump($item['id'].' '.$idcard.'');
+
             if( strlen($idcard) < 13 ){
                 ?>
                 <tr>
+                    <!-- 
                     <td><?=$i;?></td>
-                    <td><?=$item['idcard'];?></td>
-                    <td><?=$item['firstname'] . ' ' . $item['lastname'];?></td>
+                    -->
+                    <td><?=$idcard;?></td>
+                    <td><?=$item['firstname'];?></td>
                     <td><?=$item['owner'];?></td>
                 </tr>
                 <?php
@@ -48,29 +78,6 @@ class Checker extends Controller
 		$sql = "SELECT *FROM `patients`";
 		$db->select($sql);
 		$items = $db->get_items();
-
-// UPDATE `soldier`.`patients`
-// SET
-// `id` = <{id: }>,
-// `firstname` = <{firstname: }>,
-// `lastname` = <{lastname: }>,
-// `idcard` = <{idcard: }>,
-// `house_no` = <{house_no: }>,
-// `tambon` = <{tambon: }>,
-// `amphur` = <{amphur: }>,
-// `province` = <{province: }>,
-// `zipcode` = <{zipcode: }>,
-// `diag` = <{diag: }>,
-// `regula` = <{regula: }>,
-// `doctor` = <{doctor: }>,
-// `date_add` = <{date_add: }>,
-// `diag_etc` = <{diag_etc: }>,
-// `hos_id` = <{hos_id: }>,
-// `owner` = <{owner: }>,
-// `date` = <{date: }>,
-// `cert` = <{cert: }>,
-// `status` = <{status: }>
-// WHERE `id` = <{expr}>;
         
         foreach ($items as $key => $item) {
             $id = $item['id'];

@@ -2,7 +2,10 @@
 	<div class="col-sm-2"></div>
 	<div class="col-sm-8">
 		<div class="text-right">
-			<div class=""><a href="<?=getUrl();?>user/form" class="btn btn-default">เพิ่มข้อมูล</a></div>
+			<div class="">
+				<a href="<?=getUrl();?>user/form" class="btn btn-default">เพิ่มข้อมูล</a>
+				<a href="<?=getUrl();?>user/csvform" class="btn btn-default">เพิ่มข้อมูล CSV</a>
+			</div>
 		</div>
 	    <div class="">
 			<div class=""><h3 class="page-header">ผู้ใช้งาน</h3></div>

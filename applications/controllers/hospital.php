@@ -15,8 +15,10 @@ class Hospital extends Controller
 		FROM `hospital`;";
 		$db->select($sql);
 		$items = $db->get_items();
+		
 		$data = array(
-			'items' => $items
+			'items' => $items,
+			'page_count' => 0
 		);
 
 		$view = $this->load_view('hospital/index');

@@ -54,12 +54,12 @@ class Patient extends Controller{
         }
 
         $provinces = $this->get_province();
-
+        $year_chk = get_year_checkup(true, true);
         $data = array(
             'id' => 0,
             'day' => date('d'),
             'month' => date('m'),
-            'year' => date('Y'),
+            'year' => $year_chk,
             'provinces' => $provinces
         );
 
@@ -298,6 +298,102 @@ class Patient extends Controller{
         $db->select($sql);
         $items = $db->get_items();
         return $items;
+    }
+
+    public function csvform(){ 
+        global $full_months;
+        $db = $this->load_db();
+
+        $sql = "SELECT `id`,`name`
+		FROM `hospital`;";
+		$db->select($sql);
+        $hospitals = $db->get_items();
+        
+        $v = $this->load_view('patient/csvForm');
+        $v->set_val(array(
+            'full_months' => $full_months,
+            'hospitals' => $hospitals
+        ));
+        $v->render();
+    }
+
+    public function importcsv(){
+
+        $file = $_FILES['fileupload'];
+        $content = file_get_contents($file['tmp_name']);
+        if( $content !== false ){ 
+            $items = explode("\r\n", $content);
+
+            $db = $this->load_db();
+
+            foreach ($items as $key => $item) { 
+
+                if( !empty($item) ){
+                    
+                    list($firstname,$lastname,$idcard,$house_no,$tambon,$amphur,$province,$zipcode,$diag,$regula,$dr1,$dr2,$dr3,$day,$month,$year,$hos_id) = explode(',', $item); 
+
+                    $dr1 = iconv('TIS-620','UTF-8',$dr1);
+                    $dr2 = iconv('TIS-620','UTF-8',$dr2);
+                    $dr3 = iconv('TIS-620','UTF-8',$dr3);
+
+                    $doctor = json_encode(array($dr1,$dr2,$dr3));
+                    $date_add = $year.'-'.$month.'-'.$day;
+                    $owner = 'Administrator';
+
+                    $firstname = iconv('TIS-620','UTF-8',$firstname);
+                    $lastname = iconv('TIS-620','UTF-8',$lastname);
+                    $tambon = iconv('TIS-620','UTF-8',$tambon);
+                    $amphur = iconv('TIS-620','UTF-8',$amphur);
+                    $province = iconv('TIS-620','UTF-8',$province);
+                    $diag = iconv('TIS-620','UTF-8',$diag);
+                    $regula = iconv('TIS-620','UTF-8',$regula);
+                    
+
+                    $sql = "INSERT INTO `patients`
+                    ( 
+                        `id`,`firstname`,`lastname`,`idcard`,`house_no`,
+                        `tambon`,`amphur`,`province`,`zipcode`,`diag`,
+                        `regula`,`doctor`,`date_add`,`diag_etc`,`hos_id`,
+                        `owner`,`date`,`cert`,`status`
+                    )VALUES(
+                        NULL,:firstname,:lastname,:idcard,:house_no,
+                        :tambon,:amphur,:province,:zipcode,:diag,
+                        :regula,:doctor,:date_add,NULL,:hos_id,
+                        :owner,NOW(),NULL,1 
+                    );";
+
+                    $data = array(
+                        ':firstname' => $firstname,
+                        ':lastname' => $lastname,
+                        ':idcard' => $idcard,
+                        ':house_no' => $house_no,
+                        ':tambon' => $tambon,
+                        ':amphur' => $amphur,
+                        ':province' => $province,
+                        ':zipcode' => $zipcode,
+                        ':diag' => $diag,
+                        ':regula' => $regula,
+                        ':doctor' => $doctor,
+                        ':date_add' => $date_add,
+                        ':hos_id' => $hos_id,
+                        ':owner' => $owner,
+                    );
+
+                    $save = $db->insert($sql, $data);
+
+                }
+                
+            }
+        }
+
+        $msg = 'บันทึกข้อมูลเรียบร้อย';
+        if( isset($save['id']) ){
+            $msg = errorMsg('save', $save['id']);
+        }
+
+        redirect('patient/csvform', $msg);
+        exit;
+
     }
 
 }

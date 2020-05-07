@@ -8,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>รายงานการตรวจโรค</title>
+        <title>ระบบใบรับรองแพทย์เกณฑ์ทหารอิเล็กทรอนิกส์</title>
 
         <!-- Bootstrap core CSS -->
         <link href="<?=getUrl();?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?=getUrl();?>">รายงานการตรวจโรค(Demo)</a>
+            <a class="navbar-brand" href="<?=getUrl();?>">ระบบใบรับรองแพทย์อิเล็กทรอนิกส์</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

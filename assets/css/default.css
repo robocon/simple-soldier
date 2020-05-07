@@ -2,8 +2,3 @@
 	margin-top: 70px;
 	margin-bottom: 60px;
 }
-@media screen and (max-width: 375px) {
-	.logo-home1{width: 80px;height: 180px;}
-	.logo-home2{width: 120px;height: 120px;}
-	.logo-home3{width: 80px;height: 120px;}
-}

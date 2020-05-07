@@ -12,8 +12,9 @@ class Search extends Controller{
         $name = input_post('name');
         $province = input_post('province');
         $hos_select = input_post('hos_id', $this->user->hos_id);
-        $def_year = input_post('year', date('Y'));
-        $year_range = range(2016, date('Y'));
+        $year_chk = get_year_checkup(true, true);
+        $def_year = input_post('year', $year_chk);
+        $year_range = range(2016, $year_chk);
 
         $db = $this->load_db();
 
@@ -49,7 +50,9 @@ class Search extends Controller{
                 `status`
             FROM `patients`
             WHERE `status` = '1'
-            AND `date_add` >= '".( $def_year - 1 )."-10-01' AND `date_add` <= '$def_year-09-31'";
+            ";
+
+            #AND `date_add` >= '".( $def_year - 1 )."-10-01' AND `date_add` <= '$def_year-09-31'
 
             if( $idcard !== false ){
                 $sql .= "AND `idcard` LIKE '$idcard%' ";
@@ -68,7 +71,7 @@ class Search extends Controller{
             }
 
             $sql .= "ORDER BY `hos_id` DESC, `firstname` ASC ;";
-
+            
             $db->select($sql);
             $patient_list = $db->get_items();
 

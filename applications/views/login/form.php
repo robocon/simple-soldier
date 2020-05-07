@@ -1,8 +1,7 @@
 <div class="row">
-    <div class="col-sm-12 text-center logo-home">
-        <img src="<?=getUrl();?>assets/images/army.png" width="100" height="200" class="logo-home1" >
-        <img src="<?=getUrl();?>assets/images/RTAMED.png" width="150" height="150" class="logo-home2" >
-        <img src="<?=getUrl();?>assets/images/LogoFSH.jpg" width="100" height="150" class="logo-home3" >
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 text-center logo-home">
+        <img src="<?=getUrl();?>assets/images/e-med-logo.png" width="360" class="img-responsive" >
     </div>
 </div>
 <div class="row">

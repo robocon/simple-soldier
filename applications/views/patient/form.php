@@ -131,7 +131,10 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
-                                    <?=getYearList('year', true, $year, range(2016, date('Y')), 'form-control');?>
+                                    <?php
+                                    $year_chk = get_year_checkup(true, true);
+                                    echo getYearList('year', true, $year, range(2016, $year_chk), 'form-control');
+                                    ?>
                                 </div>
                             </div>
                         </div>

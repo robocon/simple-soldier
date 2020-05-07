@@ -2,7 +2,10 @@
 	<div class="col-sm-1"></div>
 	<div class="col-sm-10">
 		<div class="text-right">
-			<div class=""><a href="<?=getUrl();?>patient/form" class="btn btn-default">เพิ่มข้อมูล</a></div>
+			<div class="">
+				<a href="<?=getUrl();?>patient/form" class="btn btn-default">เพิ่มรายชื่อ</a>
+				<a href="<?=getUrl();?>patient/csvform" class="btn btn-default">เพิ่มรายชื่อแบบ CSV</a>
+			</div>
 		</div>
 		<div class="">
 			<div class=""><h3 class="page-header">รายชื่อผู้งดเว้นเกณฑ์ทหาร</h3></div>

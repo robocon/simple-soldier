@@ -19,6 +19,7 @@
 				$i = 0;
 				$max = count($items);
 				foreach( $items as $key => $item ){
+					$item['page_count'] = 0;
 					?>
 					<tr>
 						<td><?=$number;?></td>

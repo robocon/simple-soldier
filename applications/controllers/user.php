@@ -263,4 +263,63 @@ class User extends Controller{
         redirect('user/edit_password', $msg);
         
     }
+
+    public function csvform(){ 
+
+        $db = $this->load_db();
+        $sql = "SELECT `id`,`name`
+		FROM `hospital`;";
+		$db->select($sql);
+        $hospitals = $db->get_items();
+        
+        $v = $this->load_view('user/csv_form');
+        $v->set_val(array(
+            'hospitals' => $hospitals
+        ));
+        $v->render();
+    }
+
+    public function importcsv(){
+
+        global $config;
+
+        $file = $_FILES['fileupload'];
+        $content = file_get_contents($file['tmp_name']);
+        if( $content !== false ){ 
+            $items = explode("\r\n", $content);
+
+            foreach ($items as $key => $item) { 
+
+                if( !empty($item) ){
+                    
+                    list($fullname,$hospital,$email,$username,$password,$level) = explode(',', $item); 
+
+                    $password = hash('sha256', $password.$username.$config['salt']);
+
+                    $sql = "INSERT INTO `users`
+                    (`fullname`,`username`,`password`,`email`,`level`,`status`,`hos_id`,`date`)
+                    VALUES
+                    (:fullname , :username, :password, :email, :level, 1, :hos_id, NOW());";
+                    $data = array(
+                        ':fullname' => $fullname,
+                        ':username' => $username,
+                        ':password' => $password,
+                        ':email' => $email,
+                        ':level' => $level,
+                        ':hos_id' => $hospital,
+                    );
+
+                    $db = $this->load_db();
+                    $insert = $db->insert($sql, $data);
+
+                }
+                
+            }
+        }
+
+        redirect('user');
+        exit;
+
+    }
+
 }
