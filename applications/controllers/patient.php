@@ -32,7 +32,7 @@ class Patient extends Controller{
             $sql .= "AND `hos_id` = '".$this->user->hos_id."'";
         }
 
-        $sql .= "ORDER BY `id` DESC ;";
+        $sql .= "ORDER BY `id` ASC ;";
         $db->select($sql);
         $items = $db->get_items();
 
@@ -336,12 +336,20 @@ class Patient extends Controller{
                     $dr2 = iconv('TIS-620','UTF-8',$dr2);
                     $dr3 = iconv('TIS-620','UTF-8',$dr3);
 
+                    $dr1 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr1));
+                    $dr2 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr2));
+                    $dr3 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr3));
+
                     $doctor = json_encode(array($dr1,$dr2,$dr3));
-                    $date_add = $year.'-'.$month.'-'.$day;
+                    $date_add = date('Y-m-d');
                     $owner = 'Administrator';
 
                     $firstname = iconv('TIS-620','UTF-8',$firstname);
                     $lastname = iconv('TIS-620','UTF-8',$lastname);
+                    $firstname = trim(str_replace(array("\n","\r","\n\r",'"'),'',$firstname));
+                    $lastname = trim(str_replace(array("\n","\r","\n\r",'"'),'',$lastname));
+
+                    $house_no = iconv('TIS-620','UTF-8',$house_no);
                     $tambon = iconv('TIS-620','UTF-8',$tambon);
                     $amphur = iconv('TIS-620','UTF-8',$amphur);
                     $province = iconv('TIS-620','UTF-8',$province);
@@ -378,7 +386,6 @@ class Patient extends Controller{
                         ':hos_id' => $hos_id,
                         ':owner' => $owner,
                     );
-
                     $save = $db->insert($sql, $data);
 
                 }
