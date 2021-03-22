@@ -11,7 +11,8 @@ class Search extends Controller{
         $idcard = input_post('idcard');
         $name = input_post('name');
         $province = input_post('province');
-        $hos_select = input_post('hos_id', $this->user->hos_id);
+        $hos_select = input_post('hos_id','all');
+        // $hos_select = input_post('hos_id', $this->user->hos_id);
         $year_chk = get_year_checkup(true, true);
         $def_year = input_post('year', $year_chk);
         $year_range = range(2016, $year_chk);
@@ -55,7 +56,7 @@ class Search extends Controller{
             #AND `date_add` >= '".( $def_year - 1 )."-10-01' AND `date_add` <= '$def_year-09-31'
 
             if( $idcard !== false ){
-                $sql .= "AND `idcard` LIKE '$idcard%' ";
+                $sql .= "AND REPLACE(`idcard`, ' ', '') LIKE '$idcard%' ";
             }
 
             if( $hos_select !== 'all' ){

@@ -16,6 +16,8 @@ class Hospital extends Controller
 		$db->select($sql);
 		$items = $db->get_items();
 		
+		// var_dump($items);
+		// exit;
 		$data = array(
 			'items' => $items,
 			'page_count' => 0

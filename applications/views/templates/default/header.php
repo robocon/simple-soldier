@@ -55,6 +55,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <?php if( $this->user === false ): ?>
+                    <li><a href="<?=getUrl();?>download/emedical.rar">ดาวโหลดโปรแกรม</a></li>
                     <li><a href="<?=getUrl();?>login/form">เข้าสู่ระบบ</a></li>
                 <?php else: ?>
                     <?php if( $this->user ): ?>
