@@ -3,7 +3,7 @@ class User extends Controller{
 
     public function base(){
 
-        if( $this->user === false ){
+        if( $this->user === false OR $this->user->level == 'user' ){
             redirect('error');
         }
 
@@ -22,12 +22,7 @@ class User extends Controller{
             // array_push($data, array(':hospital_id' => $this->user->hos_id));
             $data[':hospital_id'] = $this->user->hos_id;
         }
-
         $sql .= " ORDER BY `id` DESC";
-
-        // dump($sql);
-        // dump($data);
-        // exit;
 
         $db->select($sql, $data);
         $users = $db->get_items();

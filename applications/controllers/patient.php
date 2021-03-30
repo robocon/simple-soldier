@@ -321,6 +321,7 @@ class Patient extends Controller{
 
         $file = $_FILES['fileupload'];
         $content = file_get_contents($file['tmp_name']);
+        $msg = 'บันทึกข้อมูลเรียบร้อย';
         if( $content !== false ){ 
             $items = explode("\r\n", $content);
 
@@ -341,7 +342,14 @@ class Patient extends Controller{
                     $dr3 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr3));
 
                     $doctor = json_encode(array($dr1,$dr2,$dr3));
-                    $date_add = date('Y-m-d');
+                    
+                    $day = sprintf('%02d',$day);
+                    $month = sprintf('%02d',$month);
+
+                    $date_add = "$year-$month-$day";
+                    if(preg_match("/\d{4}\-\d{2}\-\d{2}/",$date_add)==false){
+                        $date_add = date('Y-m-d');
+                    }
                     $owner = 'Administrator';
 
                     $firstname = iconv('TIS-620','UTF-8',$firstname);
@@ -392,8 +400,11 @@ class Patient extends Controller{
                 
             }
         }
-
-        $msg = 'บันทึกข้อมูลเรียบร้อย';
+        else
+        {
+            $msg = 'ไม่มีไฟล์ที่ต้องการบันทึก กรุณาตรวจสอบข้อมูลอีกครั้ง';
+        }
+        
         if( isset($save['id']) ){
             $msg = errorMsg('save', $save['id']);
         }
