@@ -1,7 +1,5 @@
 <h3>กรุณาตรวจสอบข้อมูลของท่านอีกครั้ง ก่อนนำเข้าข้อมูลเข้าสู่ระบบ</h3>
-<form action="" method="post">
-
-
+<form action="<?=getUrl();?>patient/importcsv2" method="post" class="main-form">
 <table class="table table-bordered">
     <tr>
         <td>ชื่อ</td>
@@ -24,7 +22,8 @@
     </tr>
 <?php 
 $i = 1;
-foreach($users as $user){
+foreach($users as $user){ 
+    $pre_send = str_replace(',','|', $user);
     list($firstname,$lastname,$idcard,$house_no,$tambon,$amphur,$province,$zipcode,$diag,$regula,$dr1,$dr2,$dr3,$day,$month,$year,$hos_id) = explode(',', $user);
     ?>
     <tr>
@@ -48,23 +47,7 @@ foreach($users as $user){
             <?php 
             echo $hos_id;
             ?>
-            <input type="hidden" name="firstname[<?=$i;?>][]" value="<?=$firstname;?>">
-            <input type="hidden" name="lastname[<?=$i;?>][]" value="<?=$lastname;?>">
-            <input type="hidden" name="idcard[<?=$i;?>][]" value="<?=$idcard;?>">
-            <input type="hidden" name="house_no[<?=$i;?>][]" value="<?=$house_no;?>">
-            <input type="hidden" name="tambon[<?=$i;?>][]" value="<?=$tambon;?>">
-            <input type="hidden" name="amphur[<?=$i;?>][]" value="<?=$amphur;?>">
-            <input type="hidden" name="province[<?=$i;?>][]" value="<?=$province;?>">
-            <input type="hidden" name="zipcode[<?=$i;?>][]" value="<?=$zipcode;?>">
-            <input type="hidden" name="diag[<?=$i;?>][]" value="<?=$diag;?>">
-            <input type="hidden" name="regula[<?=$i;?>][]" value="<?=$regula;?>">
-            <input type="hidden" name="dr1[<?=$i;?>][]" value="<?=$dr1;?>">
-            <input type="hidden" name="dr2[<?=$i;?>][]" value="<?=$dr2;?>">
-            <input type="hidden" name="dr3[<?=$i;?>][]" value="<?=$dr3;?>">
-            <input type="hidden" name="day[<?=$i;?>][]" value="<?=$day;?>">
-            <input type="hidden" name="month[<?=$i;?>][]" value="<?=$month;?>">
-            <input type="hidden" name="year[<?=$i;?>][]" value="<?=$year;?>">
-            <input type="hidden" name="hos_id[<?=$i;?>][]" value="<?=$hos_id;?>">
+            <input type="hidden" name="data[<?=$i;?>]" value="<?=$pre_send;?>">
         </td>
     </tr>
     <?php
@@ -73,7 +56,7 @@ foreach($users as $user){
 ?>
 </table>
 <div class="form-group">
-<button class="btn btn-primary" type="button" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i> ย้อนกลับ</button>
+<button class="btn btn-link" type="button" onclick="window.history.back()"><i class="glyphicon glyphicon-arrow-left"></i> ย้อนกลับ</button>
     <button class="btn btn-primary" type="submit">ดำเนินการบันทึกข้อมูล <i class="glyphicon glyphicon-arrow-right"></i></button>
 </div>
 </form>
