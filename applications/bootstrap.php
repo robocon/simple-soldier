@@ -10,7 +10,7 @@ require_once APP_DIR.'system/controller.php';
 
 function bootstrap(){
 	global $config;
-    
+	
 	// Cut off '/' after subdir
 	$request_base = substr($config['base_url'], 0, -1);
 

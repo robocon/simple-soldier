@@ -1,7 +1,8 @@
 <div>
     <fieldset>
         <legend>นำเข้ารายชื่อผู้ยกเว้นแบบ CSV</legend>
-        <form action="<?=getUrl();?>patient/importcsv" method="post" enctype="multipart/form-data">
+        <!-- patient/importcsv -->
+        <form action="<?=getUrl();?>patient/preview_csv" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="exampleFormControlFile1">เลือกไฟล์นำเข้า</label>
                 <input type="file" name="fileupload" class="form-control-file" id="exampleFormControlFile1">
@@ -36,6 +37,30 @@
             <td>เดือน ที่ตรวจ</td>
             <td>ปี ที่ตรวจ</td>
             <td>รหัสสังกัด</td>
+        </tr>
+    </table>
+    <br>
+    <h3>ตัวอย่างข้อมูล</h3>
+    <p>ให้เรียงตามช่องในโปรแกรม Excel ตามตัวอย่างต่อไปนี้</p>
+    <table class="table table-bordered">
+        <tr>
+            <td>ทรงธรรม</td>
+            <td>เจริญค้า</td>
+            <td>1529902xxxxxx</td>
+            <td>10/2 ม.1</td>
+            <td>บ่อแฮ้ว</td>
+            <td>เมือง</td>
+            <td>ลำปาง</td>
+            <td>52000</td>
+            <td>โรคหัวใจและหลอดเลือด</td>
+            <td>ข้อ 2 (3)(ข) ลิ้นหัวใจพิการ</td>
+            <td>พ.ต.แพทย์ผู้ตรวจ คนที่หนึ่ง</td>
+            <td>พ.ท.แพทย์ผู้ตรวจ คนที่สอง</td>
+            <td>พ.อ.แพทย์ผู้ตรวจ คนที่สาม</td>
+            <td>17</td>
+            <td>02</td>
+            <td>2565</td>
+            <td>1</td>
         </tr>
     </table>
     <div>

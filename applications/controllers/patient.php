@@ -317,6 +317,85 @@ class Patient extends Controller{
         $v->render();
     }
 
+    public function preview_csv(){
+        $file = $_FILES['fileupload'];
+        $content = file_get_contents($file['tmp_name']);
+        if( $content !== false ){
+            $preview_user = array(); 
+
+            $content = iconv('TIS-620','UTF-8',$content);
+
+
+            $items = explode("\r\n", $content);
+            foreach ($items as $key => $item) { 
+
+                
+
+                if( !empty($item) ){
+                    // dump($item);
+                    // list($firstname,$lastname,$idcard,$house_no,$tambon,$amphur,$province,$zipcode,$diag,$regula,$dr1,$dr2,$dr3,$day,$month,$year,$hos_id) = explode(',', $item); 
+
+                    
+
+                    // $dr1 = iconv('TIS-620','UTF-8',$dr1);
+                    // $dr2 = iconv('TIS-620','UTF-8',$dr2);
+                    // $dr3 = iconv('TIS-620','UTF-8',$dr3);
+
+                    // $dr1 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr1));
+                    // $dr2 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr2));
+                    // $dr3 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr3));
+
+                    // $doctor = json_encode(array($dr1,$dr2,$dr3));
+                    
+                    // $day = sprintf('%02d',$day);
+                    // $month = sprintf('%02d',$month);
+
+                    // $date_add = "$year-$month-$day";
+                    // if(preg_match("/\d{4}\-\d{2}\-\d{2}/",$date_add)==false){
+                    //     $date_add = date('Y-m-d');
+                    // }
+                    // $owner = 'Administrator';
+
+                    // $firstname = iconv('TIS-620','UTF-8',$firstname);
+                    // $firstname = iconv('UTF-8','TIS-620',$firstname);
+                    // dump($firstname);
+
+                    // $lastname = iconv('TIS-620','UTF-8',$lastname);
+                    // $firstname = trim(str_replace(array("\n","\r","\n\r",'"'),'',$firstname));
+                    // $lastname = trim(str_replace(array("\n","\r","\n\r",'"'),'',$lastname));
+
+                    // $house_no = iconv('TIS-620','UTF-8',$house_no);
+                    // $tambon = iconv('TIS-620','UTF-8',$tambon);
+                    // $amphur = iconv('TIS-620','UTF-8',$amphur);
+                    // $province = iconv('TIS-620','UTF-8',$province);
+                    // $diag = iconv('TIS-620','UTF-8',$diag);
+                    // $regula = iconv('TIS-620','UTF-8',$regula);
+
+
+                    // var_dump($firstname);
+                    $preview_user[] = $item;
+
+                    
+
+                }
+                
+            }// foreach
+
+            // dump($preview_user);
+
+            $v = $this->load_view('patient/preview_user');
+            $v->set_val(array(
+                'users' => $preview_user
+            ));
+            $v->render();
+
+        }// if content not false
+        else {
+            # code...
+            redirect('patient/csvform', "ไฟล์ csv มีปัญหา กรุณาตรวจสอบความถูกต้องของไฟล์อีกครั้ง");
+        }
+    }
+
     public function importcsv(){
 
         $file = $_FILES['fileupload'];
