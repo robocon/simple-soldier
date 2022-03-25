@@ -319,18 +319,123 @@ class Patient extends Controller{
 
     public function preview_csv(){
         $file = $_FILES['fileupload'];
-        $content = file_get_contents($file['tmp_name']);
-        if( $content !== false ){
-            $preview_user = array(); 
-            $content = iconv('TIS-620','UTF-8',$content);
-            $items = explode("\r\n", $content);
-            foreach ($items as $key => $item) { 
+        $preview_user = array();
+        $content = fopen($file['tmp_name'],"r");
+        $db = $this->load_db();
+        while(! feof($content))
+        {
+            $data = fgetcsv($content);
+            if($data!==false)
+            {
+                // $preview_user[] = $test_content;
+                // dump($data);
+                $firstname = $data[0];
+                $lastname = $data[1];
+                $idcard = $data[2];
+                $house_no = $data[3];
+                $tambon = $data[4];
+                $amphur = $data[5];
+                $province = $data[6];
+                $zipcode = $data[7];
+                $diag = $data[8];
+                $regula = $data[9];
+                $dr1 = $data[10];
+                $dr2 = $data[11];
+                $dr3 = $data[12];
+                $day = $data[13];
+                $month = $data[14];
+                $year = $data[15];
+                $hos_id = $data[16];
 
-                if( !empty($item) ){
-                    $preview_user[] = $item;
+                if(empty($lastname))
+                {
+                    $firstname = str_replace(array('"','นาย'), '', $firstname);
+                    $firstname = trim(preg_replace("/\s\s+/", ' ', $firstname));
+
+                    list($firstname, $lastname) = explode(' ', $firstname);
                 }
+
+                if(empty($dr2) && empty($dr3))
+                {
+                    $dr_replace = str_replace(array("\n\r","\n","\r"),',', $dr1);
+                    if(strstr($dr_replace,', ,')==false)
+                    {
+                        list($dr1,$dr2,$dr3) = explode(',', $dr_replace);
+                        $dr1 = trim($dr1);
+                        $dr2 = trim($dr2);
+                        $dr3 = trim($dr3);
+                    }
+                    else
+                    {
+                        $dr1 = trim(preg_replace("/\s\s+/", '', $dr1));
+                    }
+                    
+                }
+
+                $doctor = json_encode(array($dr1,$dr2,$dr3));
+
+                $day = sprintf('%02d',$day);
+                $month = sprintf('%02d',$month);
+                $date_add = "$year-$month-$day";
+                if(preg_match("/\d{4}\-\d{2}\-\d{2}/",$date_add)==false){
+                    $date_add = date('Y-m-d');
+                }
+                $owner = 'Administrator';
+
                 
-            }// foreach
+
+                $sql = "INSERT INTO `patients`
+                ( 
+                    `id`,`firstname`,`lastname`,`idcard`,`house_no`,
+                    `tambon`,`amphur`,`province`,`zipcode`,`diag`,
+                    `regula`,`doctor`,`date_add`,`diag_etc`,`hos_id`,
+                    `owner`,`date`,`cert`,`status`
+                )VALUES(
+                    NULL,:firstname,:lastname,:idcard,:house_no,
+                    :tambon,:amphur,:province,:zipcode,:diag,
+                    :regula,:doctor,:date_add,NULL,:hos_id,
+                    :owner,NOW(),NULL,1 
+                );";
+
+                $prepare_data = array(
+                    ':firstname' => $firstname,
+                    ':lastname' => $lastname,
+                    ':idcard' => $idcard,
+                    ':house_no' => $house_no,
+                    ':tambon' => $tambon,
+                    ':amphur' => $amphur,
+                    ':province' => $province,
+                    ':zipcode' => $zipcode,
+                    ':diag' => $diag,
+                    ':regula' => $regula,
+                    ':doctor' => $doctor,
+                    ':date_add' => $date_add,
+                    ':hos_id' => $hos_id,
+                    ':owner' => $owner,
+                );
+
+                // dump($prepare_data);
+                $save = $db->insert($sql, $prepare_data);
+                if( isset($save['id']) ){
+                    $msg = errorMsg('save', $save['id']);
+                    redirect('patient/csvform', $msg);
+                    exit;
+                }
+
+                
+            } // if data not false
+            
+
+        } // end while
+        redirect('patient/csvform', "บันทึกข้อมูลเรียบร้อย");
+        exit;
+
+        
+
+        
+        
+        if( $content !== false ){ 
+
 
             $v = $this->load_view('patient/preview_user');
             $v->set_val(array(
@@ -340,7 +445,6 @@ class Patient extends Controller{
 
         }// if content not false
         else {
-            # code...
             redirect('patient/csvform', "ไฟล์ csv มีปัญหา กรุณาตรวจสอบความถูกต้องของไฟล์อีกครั้ง");
         }
     }
@@ -450,9 +554,9 @@ class Patient extends Controller{
             
             list($firstname,$lastname,$idcard,$house_no,$tambon,$amphur,$province,$zipcode,$diag,$regula,$dr1,$dr2,$dr3,$day,$month,$year,$hos_id) = explode('|', $item); 
 
-            $dr1 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr1));
-            $dr2 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr2));
-            $dr3 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr3));
+            // $dr1 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr1));
+            // $dr2 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr2));
+            // $dr3 = trim(str_replace(array("\n","\r","\n\r",'"'),'',$dr3));
             $doctor = json_encode(array($dr1,$dr2,$dr3));
 
             $day = sprintf('%02d',$day);

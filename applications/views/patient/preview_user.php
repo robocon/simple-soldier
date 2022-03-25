@@ -23,8 +23,62 @@
 <?php 
 $i = 1;
 foreach($users as $user){ 
-    $pre_send = str_replace(',','|', $user);
-    list($firstname,$lastname,$idcard,$house_no,$tambon,$amphur,$province,$zipcode,$diag,$regula,$dr1,$dr2,$dr3,$day,$month,$year,$hos_id) = explode(',', $user);
+    // dump($user);
+    $firstname = $user[0];
+    $lastname = $user[1];
+    $idcard = $user[2];
+    $house_no = $user[3];
+    $tambon = $user[4];
+    $amphur = $user[5];
+    $province = $user[6];
+    $zipcode = $user[7];
+    $diag = $user[8];
+    $regula = $user[9];
+    $dr1 = $user[10];
+    $dr2 = $user[11];
+    $dr3 = $user[12];
+    $day = $user[13];
+    $month = $user[14];
+    $year = $user[15];
+    $hos_id = $user[16];
+
+    // continue;
+    // $pre_send = str_replace(',','|', trim($user));
+    // list($firstname,$lastname,$idcard,$house_no,$tambon,$amphur,$province,$zipcode,$diag,$regula,$dr1,$dr2,$dr3,$day,$month,$year,$hos_id) = explode(',', $user);
+    if(empty($lastname))
+    {
+        $firstname = str_replace(array('"','นาย'), '', $firstname);
+        $firstname = trim(preg_replace("/\s+/", ' ', $firstname));
+
+        list($firstname, $lastname) = explode(' ', $firstname);
+    }
+
+    $regula = str_replace('"', '', trim($regula));
+    
+    if(empty($dr2) && empty($dr3))
+    {
+        $dr_replace = str_replace(array("\n\r","\n","\r"),',', $dr1);
+        if(strstr($dr_replace,', ,')==false)
+        {
+            list($dr1,$dr2,$dr3) = explode(',', $dr_replace);
+            $dr1 = trim($dr1);
+            $dr2 = trim($dr2);
+            $dr3 = trim($dr3);
+        }
+        else
+        {
+            $dr1 = trim(preg_replace("/\s+/", '', $dr1));
+        }
+        
+    }
+    
+    $idcard = str_replace('"', '', trim($idcard));
+    $house_no = str_replace('"', '', trim($house_no));
+    $amphur = str_replace('"', '', trim($amphur));
+    $province = str_replace('"', '', trim($province));
+
+    $pre_send = $firstname.'|'.$lastname.'|'.$idcard.'|'.$house_no.'|'.$tambon.'|'.$amphur.'|'.$province.'|'.$zipcode.'|'.$diag.'|'.$regula.'|'.$dr1.'|'.$dr2.'|'.$dr3.'|'.$day.'|'.$month.'|'.$year.'|'.$hos_id;
+    
     ?>
     <tr>
         <td><?=$firstname;?></td>
