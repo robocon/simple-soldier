@@ -78,7 +78,7 @@ class Patient extends Controller{
         $file = $_FILES['cert'];
         $file_ext = substr($file['name'], strrpos($file['name'], '.') + 1);
         if( $file_ext !== 'pdf' && $file['error'] === 0 ){
-            js_alert('à¸­à¸™à¸¸à¸à¸²à¸•à¹€à¸‰à¸žà¸²à¸°à¹„à¸Ÿà¸¥à¹Œ pdf à¹€à¸—à¹ˆà¸²à¸™à¸±à¹‰à¸™');
+            js_alert('à¸­à¸ÿà¸¸à¸ÿà¸²à¸•à¹€à¸ÿà¸ÿà¸²à¸°à¹ÿà¸ÿà¸¥à¹ÿ pdf à¹€à¸—à¹ÿà¸²à¸ÿà¸±à¹ÿà¸ÿ');
         }
 
         $firstname = input_post('firstname');
@@ -93,7 +93,7 @@ class Patient extends Controller{
         $regula = input_post('regula');
         $doctor = input_post('doctor');
         $date_add = input_post('year').'-'.input_post('month').'-'.input_post('day');
-        $hos_id = $this->user->hos_id; // à¸­à¸´à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥ à¸£à¸ž.à¸‚à¸­à¸‡à¸œà¸¹à¹‰à¸›à¹ˆà¸§à¸¢à¸•à¸²à¸¡à¸œà¸¹à¹‰à¸à¸£à¸­à¸à¹„à¸›à¸à¹ˆà¸­à¸™
+        $hos_id = $this->user->hos_id; // à¸­à¸´à¸ÿà¸ÿà¹ÿà¸­à¸¡à¸¹à¸¥ à¸£à¸ÿ.à¸ÿà¸­à¸ÿà¸ÿà¸¹à¹ÿà¸ÿà¹ÿà¸§à¸¢à¸•à¸²à¸¡à¸ÿà¸¹à¹ÿà¸ÿà¸£à¸­à¸ÿà¹ÿà¸ÿà¸ÿà¹ÿà¸­à¸ÿ
         $owner = $this->user->fullname;
         $doctor = json_encode($_POST['doctor']);
         $id = input_post('id');
@@ -198,7 +198,7 @@ class Patient extends Controller{
             $item_id = $id;
         }
 
-        $msg = 'à¸šà¸±à¸™à¸—à¸¶à¸à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹€à¸£à¸µà¸¢à¸šà¸£à¹‰à¸­à¸¢';
+        $msg = 'à¸ÿà¸±à¸ÿà¸—à¸¶à¸ÿà¸ÿà¹ÿà¸­à¸¡à¸¹à¸¥à¹€à¸£à¸µà¸¢à¸ÿà¸£à¹ÿà¸­à¸¢';
         if( isset($save['id']) ){
             $msg = errorMsg('save', $save['id']);
         }
@@ -287,7 +287,7 @@ class Patient extends Controller{
         WHERE `id` = :item_id;";
         $db->update($sql, array(':item_id' => $item_id));
 
-        redirect('patient', 'à¸¥à¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹€à¸£à¸µà¸¢à¸šà¸£à¹‰à¸­à¸¢');
+        redirect('patient', 'à¸¥à¸ÿà¸ÿà¹ÿà¸­à¸¡à¸¹à¸¥à¹€à¸£à¸µà¸¢à¸ÿà¸£à¹ÿà¸­à¸¢');
     }
 
     private function get_province(){
@@ -299,6 +299,46 @@ class Patient extends Controller{
         $items = $db->get_items();
         return $items;
     }
+	
+	public function show_doctor(){
+		if( $this->user === false ){
+            redirect('error');
+        }
+
+        $db = $this->load_db();
+
+        /**
+         *
+         */
+        $sql = "SELECT 
+            `doctor` 
+        FROM `patients`
+        WHERE `status` = 1 ";
+		
+        $db->select($sql);
+        $items = $db->get_items();
+	
+		?>
+		<table>
+		<?php
+        foreach( $items as $key => $item){
+            ?>
+            <tr>
+            <?php
+			$test_doc = json_decode($item['doctor']);
+			foreach( $test_doc as $doc ){
+				?>
+                <td><?=$doc;?></td>
+                <?php
+			}
+			?>
+            </tr>
+            <?php
+		}
+        ?>
+        </table>
+        <?php
+	}
 
     public function csvform(){ 
         global $full_months;
